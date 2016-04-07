@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "timerView.h"
 
 @interface ViewController ()
 
@@ -21,7 +22,7 @@
 
 @implementation ViewController
 
-const uint DEFAULT_TIME = 10;
+const uint DEFAULT_TIME = 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -29,7 +30,8 @@ const uint DEFAULT_TIME = 10;
   self.timeLabel.text = @"";
   self.time = DEFAULT_TIME;
   self.title = @"hahaha";
-  // Do any additional setup after loading the view, typically from a nib.
+  
+  [self.view setNeedsDisplay];
 }
 
 - (UILocalNotification *)finishNotification {
@@ -48,13 +50,17 @@ const uint DEFAULT_TIME = 10;
 //  self.timeLabel.text = [self toTimeWith: self.time];
   NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countdown:) userInfo:nil repeats:true];
   timer.tolerance = 0.1;
-  [self postNotification:self.finishNotification after:DEFAULT_TIME];
+//  [self postNotification:self.finishNotification after:DEFAULT_TIME];
 }
 
 - (void)countdown:(NSTimer*)timer {
 //  NSLog(@"%d", count++);
   self.timeLabel.text = [self toTimeStringWith: --self.time];
-  NSLog(@"%lu", self.time);
+//  NSLog(@"%lu", self.time);
+  if (self.time % 30 == 0) {
+    ((timerView *)self.view).angle += 10800 / DEFAULT_TIME;
+    [self.view setNeedsDisplay];
+  }
   if (self.time == 0) {
     [timer invalidate];
     [self countdownDidFinish];
@@ -65,6 +71,8 @@ const uint DEFAULT_TIME = 10;
   self.time = DEFAULT_TIME;
   self.startButton.hidden = NO;
   self.timeLabel.hidden = YES;
+  ((timerView *)self.view).angle = 0;
+  [self.view setNeedsDisplay];
 }
 
 - (void)postNotification:(UILocalNotification *)notification after: (NSUInteger)time {

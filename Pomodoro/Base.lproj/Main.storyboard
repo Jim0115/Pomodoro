@@ -14,14 +14,14 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="timerView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:59" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNZ-jQ-W5b">
                                 <rect key="frame" x="20" y="265" width="560" height="71.5"/>
                                 <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="63"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abs-7h-6YN">
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="abs-7h-6YN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GLu-74-Ke1"/>
                             <constraint firstItem="abs-7h-6YN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="KE4-BW-YSG"/>
@@ -42,7 +42,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="zNZ-jQ-W5b" secondAttribute="trailing" id="nJ6-JH-e1g"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="IDP-oD-aKJ"/>
+                    <navigationItem key="navigationItem" id="IDP-oD-aKJ">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="ama-FN-ILM">
+                            <connections>
+                                <segue destination="k5a-Aj-B40" kind="show" identifier="showHistory" id="ORU-XD-5IV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="startButton" destination="abs-7h-6YN" id="D8W-U7-nBn"/>
                         <outlet property="timeLabel" destination="zNZ-jQ-W5b" id="KcY-QZ-VNY"/>
@@ -51,6 +57,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1055" y="339"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="7fS-zQ-YGQ">
+            <objects>
+                <tableViewController id="k5a-Aj-B40" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="q6o-JK-fcJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recordCell" id="J25-dJ-bfr">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J25-dJ-bfr" id="nlw-Dp-Tbq">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="k5a-Aj-B40" id="Fu6-xA-h4g"/>
+                            <outlet property="delegate" destination="k5a-Aj-B40" id="dBH-UQ-cKN"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r4i-Ay-hp6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1762" y="339"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ody-n0-D8i">

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCB490481CB6502A00E8A919 /* timerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB490471CB6502A00E8A919 /* timerView.m */; };
 		CCF88F3C1CB3EFD700AED924 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F3B1CB3EFD700AED924 /* main.m */; };
 		CCF88F3F1CB3EFD700AED924 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F3E1CB3EFD700AED924 /* AppDelegate.m */; };
 		CCF88F421CB3EFD700AED924 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F411CB3EFD700AED924 /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CCB490461CB6502A00E8A919 /* timerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timerView.h; sourceTree = "<group>"; };
+		CCB490471CB6502A00E8A919 /* timerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timerView.m; sourceTree = "<group>"; };
 		CCF88F371CB3EFD700AED924 /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCF88F3B1CB3EFD700AED924 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CCF88F3D1CB3EFD700AED924 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -65,6 +68,8 @@
 				CCF88F401CB3EFD700AED924 /* ViewController.h */,
 				CCF88F411CB3EFD700AED924 /* ViewController.m */,
 				CCF88F431CB3EFD700AED924 /* Main.storyboard */,
+				CCB490461CB6502A00E8A919 /* timerView.h */,
+				CCB490471CB6502A00E8A919 /* timerView.m */,
 				CCF88F491CB3EFD700AED924 /* Assets.xcassets */,
 				CCF88F4B1CB3EFD700AED924 /* LaunchScreen.storyboard */,
 				CCF88F4E1CB3EFD700AED924 /* Info.plist */,
@@ -157,6 +162,7 @@
 				CCF88F421CB3EFD700AED924 /* ViewController.m in Sources */,
 				CCF88F3F1CB3EFD700AED924 /* AppDelegate.m in Sources */,
 				CCF88F3C1CB3EFD700AED924 /* main.m in Sources */,
+				CCB490481CB6502A00E8A919 /* timerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +313,7 @@
 				CCF88F531CB3EFD700AED924 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
