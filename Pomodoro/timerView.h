@@ -10,6 +10,6 @@
 
 @interface timerView : UIView
 
-@property (nonatomic) double angle;
+@property (nonatomic) double percentage;
 
 @end

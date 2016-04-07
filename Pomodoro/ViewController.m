@@ -31,6 +31,8 @@ const uint DEFAULT_TIME = 25 * 60;
   self.time = DEFAULT_TIME;
   self.title = @"hahaha";
   
+  ((timerView *)self.view).percentage = 1;
+  
   [self.view setNeedsDisplay];
 }
 
@@ -57,8 +59,8 @@ const uint DEFAULT_TIME = 25 * 60;
 //  NSLog(@"%d", count++);
   self.timeLabel.text = [self toTimeStringWith: --self.time];
 //  NSLog(@"%lu", self.time);
-  if (self.time % 30 == 0) {
-    ((timerView *)self.view).angle += 10800 / DEFAULT_TIME;
+  if (self.time % 3 == 0) {
+    ((timerView *)self.view).percentage = (double)self.time / (double)DEFAULT_TIME;
     [self.view setNeedsDisplay];
   }
   if (self.time == 0) {
@@ -71,7 +73,7 @@ const uint DEFAULT_TIME = 25 * 60;
   self.time = DEFAULT_TIME;
   self.startButton.hidden = NO;
   self.timeLabel.hidden = YES;
-  ((timerView *)self.view).angle = 0;
+  ((timerView *)self.view).percentage = 1;
   [self.view setNeedsDisplay];
 }
 
