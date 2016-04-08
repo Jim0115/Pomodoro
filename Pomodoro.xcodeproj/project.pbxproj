@@ -44,6 +44,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CCB4904C1CB738C100E8A919 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CCF88F431CB3EFD700AED924 /* Main.storyboard */,
+				CCB490461CB6502A00E8A919 /* timerView.h */,
+				CCB490471CB6502A00E8A919 /* timerView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		CCB4904D1CB738D400E8A919 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CCF88F401CB3EFD700AED924 /* ViewController.h */,
+				CCF88F411CB3EFD700AED924 /* ViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		CCB4904E1CB738E200E8A919 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CCF88F461CB3EFD700AED924 /* Pomodoro.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		CCF88F2E1CB3EFD700AED924 = {
 			isa = PBXGroup;
 			children = (
@@ -65,15 +92,9 @@
 			children = (
 				CCF88F3D1CB3EFD700AED924 /* AppDelegate.h */,
 				CCF88F3E1CB3EFD700AED924 /* AppDelegate.m */,
-				CCF88F401CB3EFD700AED924 /* ViewController.h */,
-				CCF88F411CB3EFD700AED924 /* ViewController.m */,
-				CCF88F431CB3EFD700AED924 /* Main.storyboard */,
-				CCB490461CB6502A00E8A919 /* timerView.h */,
-				CCB490471CB6502A00E8A919 /* timerView.m */,
-				CCF88F491CB3EFD700AED924 /* Assets.xcassets */,
-				CCF88F4B1CB3EFD700AED924 /* LaunchScreen.storyboard */,
-				CCF88F4E1CB3EFD700AED924 /* Info.plist */,
-				CCF88F461CB3EFD700AED924 /* Pomodoro.xcdatamodeld */,
+				CCB4904E1CB738E200E8A919 /* Model */,
+				CCB4904C1CB738C100E8A919 /* View */,
+				CCB4904D1CB738D400E8A919 /* Controller */,
 				CCF88F3A1CB3EFD700AED924 /* Supporting Files */,
 			);
 			path = Pomodoro;
@@ -82,6 +103,9 @@
 		CCF88F3A1CB3EFD700AED924 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CCF88F491CB3EFD700AED924 /* Assets.xcassets */,
+				CCF88F4B1CB3EFD700AED924 /* LaunchScreen.storyboard */,
+				CCF88F4E1CB3EFD700AED924 /* Info.plist */,
 				CCF88F3B1CB3EFD700AED924 /* main.m */,
 			);
 			name = "Supporting Files";

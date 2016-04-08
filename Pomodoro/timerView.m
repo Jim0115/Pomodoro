@@ -15,15 +15,23 @@ IB_DESIGNABLE
 
 @implementation timerView
 
+const uint SPACE = 5;
+
 - (void)drawRect:(CGRect)rect {
-  NSLog(@"%f", self.percentage);
-  const uint SPACE = 5;
-  NSUInteger width = self.bounds.size.width - SPACE * 2;
+  
+  NSUInteger width;
+  
+  if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+    width = self.bounds.size.width / 4;
+  } else {
+    width = self.bounds.size.width / 2 - SPACE * 2;
+  }
+
   UIBezierPath* round = [[UIBezierPath alloc] init];
   [round addArcWithCenter:self.center
-                   radius:width / 2
+                   radius:width
                startAngle:-M_PI_2
-                 endAngle:M_PI * 2 * self.percentage - M_PI_2
+                 endAngle:-M_PI_2 + M_PI * 2 * self.percentage
                 clockwise:YES];
   [[UIColor redColor] setStroke];
   round.lineWidth = 3;

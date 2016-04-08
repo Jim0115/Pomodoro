@@ -29,14 +29,19 @@ const uint DEFAULT_TIME = 25 * 60;
   self.timeLabel.hidden = YES;
   self.timeLabel.text = @"";
   self.time = DEFAULT_TIME;
-  self.title = @"hahaha";
+
   
   ((timerView *)self.view).percentage = 1;
   
   [self.view setNeedsDisplay];
 }
 
-- (UILocalNotification *)finishNotification {
+-(void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  self.title = @"hahaha";
+}
+
+- (UILocalNotification *)finishNotification { // lazt 
   UILocalNotification* noti = [[UILocalNotification alloc] init];
   
   noti.alertTitle = @"Pomodoro";
@@ -49,16 +54,13 @@ const uint DEFAULT_TIME = 25 * 60;
   sender.hidden = YES;
   self.timeLabel.hidden = NO;
   [self countdown:nil];
-//  self.timeLabel.text = [self toTimeWith: self.time];
   NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countdown:) userInfo:nil repeats:true];
   timer.tolerance = 0.1;
 //  [self postNotification:self.finishNotification after:DEFAULT_TIME];
 }
 
 - (void)countdown:(NSTimer*)timer {
-//  NSLog(@"%d", count++);
   self.timeLabel.text = [self toTimeStringWith: --self.time];
-//  NSLog(@"%lu", self.time);
   if (self.time % 3 == 0) {
     ((timerView *)self.view).percentage = (double)self.time / (double)DEFAULT_TIME;
     [self.view setNeedsDisplay];
@@ -79,7 +81,6 @@ const uint DEFAULT_TIME = 25 * 60;
 
 - (void)postNotification:(UILocalNotification *)notification after: (NSUInteger)time {
   [notification setFireDate:[NSDate dateWithTimeIntervalSinceNow:time]];
-  
   [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
