@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "timerView.h"
+#import "TimerView.h"
 
 @interface ViewController ()
 
@@ -31,7 +31,7 @@ const uint DEFAULT_TIME = 25 * 60;
   self.time = DEFAULT_TIME;
 
   
-  ((timerView *)self.view).percentage = 1;
+  ((TimerView *)self.view).percentage = 1;
   
   [self.view setNeedsDisplay];
 }
@@ -62,7 +62,7 @@ const uint DEFAULT_TIME = 25 * 60;
 - (void)countdown:(NSTimer*)timer {
   self.timeLabel.text = [self toTimeStringWith: --self.time];
   if (self.time % 3 == 0) {
-    ((timerView *)self.view).percentage = (double)self.time / (double)DEFAULT_TIME;
+    ((TimerView *)self.view).percentage = (double)self.time / (double)DEFAULT_TIME;
     [self.view setNeedsDisplay];
   }
   if (self.time == 0) {
@@ -75,7 +75,7 @@ const uint DEFAULT_TIME = 25 * 60;
   self.time = DEFAULT_TIME;
   self.startButton.hidden = NO;
   self.timeLabel.hidden = YES;
-  ((timerView *)self.view).percentage = 1;
+  ((TimerView *)self.view).percentage = 1;
   [self.view setNeedsDisplay];
 }
 

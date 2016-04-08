@@ -1,19 +1,19 @@
 //
-//  timerView.m
+//  TimerView.m
 //  Pomodoro
 //
 //  Created by 王仕杰 on 4/7/16.
 //  Copyright © 2016 王仕杰. All rights reserved.
 //
 
-#import "timerView.h"
+#import "TimerView.h"
 
 IB_DESIGNABLE
-@interface timerView ()
+@interface TimerView ()
 
 @end
 
-@implementation timerView
+@implementation TimerView
 
 const uint SPACE = 5;
 

@@ -1,5 +1,5 @@
 //
-//  timerView.h
+//  TimerView.h
 //  Pomodoro
 //
 //  Created by 王仕杰 on 4/7/16.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface timerView : UIView
+@interface TimerView : UIView
 
 @property (nonatomic) double percentage;
 
