@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "TimerView.h"
+#import "Record.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
@@ -17,6 +19,10 @@
 @property (nonatomic) NSUInteger time;
 
 @property (nonatomic, readonly) UILocalNotification* finishNotification;
+
+@property (nonatomic) NSDateFormatter* formatter;
+
+@property (nonatomic, readonly) NSManagedObjectContext* context;
 
 @end
 
@@ -38,16 +44,28 @@ const uint DEFAULT_TIME = 25 * 60;
 
 -(void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  self.title = @"hahaha";
+  self.title = @"Timer";
 }
 
-- (UILocalNotification *)finishNotification { // lazt 
+- (UILocalNotification *)finishNotification { // lazy init
   UILocalNotification* noti = [[UILocalNotification alloc] init];
   
   noti.alertTitle = @"Pomodoro";
   noti.alertBody = @"Pomodoro Time Up!";
   
   return noti;
+}
+
+- (NSManagedObjectContext *)context {
+  return ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+}
+
+- (NSDateFormatter *)formatter {
+  NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+  
+  formatter.dateFormat = @"HH:mm";
+  
+  return formatter;
 }
 
 - (IBAction)startTimer:(UIButton *)sender {
@@ -77,6 +95,17 @@ const uint DEFAULT_TIME = 25 * 60;
   self.timeLabel.hidden = YES;
   ((TimerView *)self.view).percentage = 1;
   [self.view setNeedsDisplay];
+  
+  NSEntityDescription* entity = [NSEntityDescription entityForName:@"Record"
+                                            inManagedObjectContext:self.context];
+  
+  Record* r = [[Record alloc] initWithEntity:entity
+              insertIntoManagedObjectContext:self.context];
+  r.starttime = [self.formatter stringFromDate:[NSDate date]];
+  r.endtime = [self.formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME]];
+  r.date = [NSDate date];
+//  [self.context insertObject:r];
+  [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
 }
 
 - (void)postNotification:(UILocalNotification *)notification after: (NSUInteger)time {

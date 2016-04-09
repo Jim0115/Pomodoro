@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Record : NSManagedObject
 
-// Insert code here to declare functionality of your managed object subclass
+- (NSString *)getMonthString;
 
 @end
 
