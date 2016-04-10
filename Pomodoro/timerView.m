@@ -17,6 +17,11 @@ IB_DESIGNABLE
 
 const uint SPACE = 5;
 
+- (void)setPercentage:(double)percentage {
+  _percentage = percentage;
+  [self setNeedsDisplay];
+}
+
 - (void)drawRect:(CGRect)rect {
   
   NSUInteger width;

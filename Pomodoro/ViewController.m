@@ -32,14 +32,11 @@ const uint DEFAULT_TIME = 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
   self.timeLabel.hidden = YES;
-  self.timeLabel.text = @"";
   self.time = DEFAULT_TIME;
-
   
   ((TimerView *)self.view).percentage = 1;
-  
-  [self.view setNeedsDisplay];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -48,6 +45,7 @@ const uint DEFAULT_TIME = 25 * 60;
 }
 
 - (UILocalNotification *)finishNotification { // lazy init
+  
   UILocalNotification* noti = [[UILocalNotification alloc] init];
   
   noti.alertTitle = @"Pomodoro";
@@ -61,11 +59,14 @@ const uint DEFAULT_TIME = 25 * 60;
 }
 
 - (NSDateFormatter *)formatter {
-  NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
   
-  formatter.dateFormat = @"HH:mm";
+  if (!_formatter) {
+    _formatter = [[NSDateFormatter alloc] init];
+  }
   
-  return formatter;
+  _formatter.dateFormat = @"HH:mm";
+  
+  return _formatter;
 }
 
 - (IBAction)startTimer:(UIButton *)sender {
@@ -81,7 +82,6 @@ const uint DEFAULT_TIME = 25 * 60;
   self.timeLabel.text = [self toTimeStringWith: --self.time];
   if (self.time % 3 == 0) {
     ((TimerView *)self.view).percentage = (double)self.time / (double)DEFAULT_TIME;
-    [self.view setNeedsDisplay];
   }
   if (self.time == 0) {
     [timer invalidate];
@@ -94,7 +94,6 @@ const uint DEFAULT_TIME = 25 * 60;
   self.startButton.hidden = NO;
   self.timeLabel.hidden = YES;
   ((TimerView *)self.view).percentage = 1;
-  [self.view setNeedsDisplay];
   
   NSEntityDescription* entity = [NSEntityDescription entityForName:@"Record"
                                             inManagedObjectContext:self.context];

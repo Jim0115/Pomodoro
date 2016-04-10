@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CC2654AE1CB7B66C00F5DC84 /* Record+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2654AB1CB7B66C00F5DC84 /* Record+CoreDataProperties.m */; };
 		CC2654AF1CB7B66C00F5DC84 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2654AD1CB7B66C00F5DC84 /* Record.m */; };
+		CC653C771CB9CF87008D1239 /* HistorySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CC653C761CB9CF87008D1239 /* HistorySegue.m */; };
 		CCB490481CB6502A00E8A919 /* TimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB490471CB6502A00E8A919 /* TimerView.m */; };
 		CCB490511CB75CB700E8A919 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB490501CB75CB700E8A919 /* HistoryTableViewController.m */; };
 		CCF88F3C1CB3EFD700AED924 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F3B1CB3EFD700AED924 /* main.m */; };
@@ -25,6 +26,8 @@
 		CC2654AB1CB7B66C00F5DC84 /* Record+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CC2654AC1CB7B66C00F5DC84 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		CC2654AD1CB7B66C00F5DC84 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		CC653C751CB9CF87008D1239 /* HistorySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistorySegue.h; sourceTree = "<group>"; };
+		CC653C761CB9CF87008D1239 /* HistorySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistorySegue.m; sourceTree = "<group>"; };
 		CCB490461CB6502A00E8A919 /* TimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TimerView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CCB490471CB6502A00E8A919 /* TimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TimerView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CCB4904F1CB75CB700E8A919 /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
@@ -70,6 +73,8 @@
 				CCB490501CB75CB700E8A919 /* HistoryTableViewController.m */,
 				CCF88F401CB3EFD700AED924 /* ViewController.h */,
 				CCF88F411CB3EFD700AED924 /* ViewController.m */,
+				CC653C751CB9CF87008D1239 /* HistorySegue.h */,
+				CC653C761CB9CF87008D1239 /* HistorySegue.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -197,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC653C771CB9CF87008D1239 /* HistorySegue.m in Sources */,
 				CC2654AE1CB7B66C00F5DC84 /* Record+CoreDataProperties.m in Sources */,
 				CC2654AF1CB7B66C00F5DC84 /* Record.m in Sources */,
 				CCB490511CB75CB700E8A919 /* HistoryTableViewController.m in Sources */,
