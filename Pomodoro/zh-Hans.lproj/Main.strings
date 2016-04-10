@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; text = "     aloha"; ObjectID = "WZ6-Px-5pg"; */
+"WZ6-Px-5pg.text" = "     aloha";
+
+/* Class = "UIButton"; normalTitle = "Start"; ObjectID = "abs-7h-6YN"; */
+"abs-7h-6YN.normalTitle" = "开始";
+
+/* Class = "UIBarButtonItem"; title = "History"; ObjectID = "ama-FN-ILM"; */
+"ama-FN-ILM.title" = "历史";
+
+/* Class = "UILabel"; text = "23:59"; ObjectID = "zNZ-jQ-W5b"; */
+"zNZ-jQ-W5b.text" = "23:59";

@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Pomodoro
+
+  Created by 王仕杰 on 4/10/16.
+  Copyright © 2016 王仕杰. All rights reserved.
+*/
+
+CFBundleDisplayName ="番茄时钟";
