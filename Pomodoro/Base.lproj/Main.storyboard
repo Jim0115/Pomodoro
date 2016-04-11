@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,32 +13,43 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="TimerView">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:59" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNZ-jQ-W5b">
-                                <rect key="frame" x="16" y="298" width="343" height="71.5"/>
-                                <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="63"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abs-7h-6YN">
-                                <rect key="frame" x="115" y="285" width="144" height="96"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
-                                <state key="normal" title="Start"/>
-                                <connections>
-                                    <action selector="startTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="znA-Ky-pNA"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHA-UJ-ewl" customClass="TimerView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:59" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNZ-jQ-W5b">
+                                        <rect key="frame" x="93" y="298.5" width="189.5" height="71.5"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="63"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abs-7h-6YN">
+                                        <rect key="frame" x="115" y="286" width="144" height="96"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                        <state key="normal" title="Start"/>
+                                        <connections>
+                                            <action selector="startTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="znA-Ky-pNA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="zNZ-jQ-W5b" firstAttribute="centerX" secondItem="iHA-UJ-ewl" secondAttribute="centerX" id="Yof-XE-SiB"/>
+                                    <constraint firstItem="zNZ-jQ-W5b" firstAttribute="centerY" secondItem="iHA-UJ-ewl" secondAttribute="centerY" id="al6-v7-irH"/>
+                                    <constraint firstItem="abs-7h-6YN" firstAttribute="centerX" secondItem="iHA-UJ-ewl" secondAttribute="centerX" id="bjX-Ok-8EV"/>
+                                    <constraint firstItem="abs-7h-6YN" firstAttribute="centerY" secondItem="iHA-UJ-ewl" secondAttribute="centerY" id="sSA-Rs-ALA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="abs-7h-6YN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GLu-74-Ke1"/>
-                            <constraint firstItem="abs-7h-6YN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="KE4-BW-YSG"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="zNZ-jQ-W5b" secondAttribute="leading" id="KFR-vy-WC0"/>
-                            <constraint firstItem="zNZ-jQ-W5b" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="e5R-mN-ZuA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="zNZ-jQ-W5b" secondAttribute="trailing" id="nJ6-JH-e1g"/>
+                            <constraint firstItem="iHA-UJ-ewl" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="GSO-tH-kiO"/>
+                            <constraint firstItem="iHA-UJ-ewl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QPO-Ja-NKW"/>
+                            <constraint firstItem="iHA-UJ-ewl" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Rnp-tv-mze"/>
+                            <constraint firstItem="iHA-UJ-ewl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xaj-Fa-dne"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IDP-oD-aKJ">
@@ -53,11 +63,12 @@
                     <connections>
                         <outlet property="startButton" destination="abs-7h-6YN" id="D8W-U7-nBn"/>
                         <outlet property="timeLabel" destination="zNZ-jQ-W5b" id="KcY-QZ-VNY"/>
+                        <outlet property="timerView" destination="iHA-UJ-ewl" id="xlP-UB-GtM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055" y="339"/>
+            <point key="canvasLocation" x="1054.5" y="338.5"/>
         </scene>
         <!--History Table View Controller-->
         <scene sceneID="7fS-zQ-YGQ">

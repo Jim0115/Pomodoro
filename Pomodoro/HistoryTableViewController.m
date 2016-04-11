@@ -13,16 +13,13 @@
 @interface HistoryTableViewController ()
 
 @property (nonatomic, readonly) NSManagedObjectContext* context;
-@property (nonatomic, readonly) NSArray* records;
-@property (nonatomic) NSArray* processedByMonth;
+@property (nonatomic, readonly, copy) NSArray* records;
+@property (nonatomic, copy) NSArray* processedByMonth;
 
 @end
 
 @implementation HistoryTableViewController
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
-}
 
 #pragma mark - core date RW
 

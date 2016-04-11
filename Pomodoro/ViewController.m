@@ -15,20 +15,22 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (weak, nonatomic) IBOutlet TimerView *timerView;
 
 @property (nonatomic) NSUInteger time;
 
 @property (nonatomic, readonly) UILocalNotification* finishNotification;
 
-@property (nonatomic) NSDateFormatter* formatter;
+@property (nonatomic) NSDateFormatter* minAndSecFormatter;
 
 @property (nonatomic, readonly) NSManagedObjectContext* context;
+@property (nonatomic, readonly, copy) NSArray* records;
 
 @end
 
 @implementation ViewController
 
-const uint DEFAULT_TIME = 25 * 60;
+const uint DEFAULT_TIME = 10; // 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -36,12 +38,31 @@ const uint DEFAULT_TIME = 25 * 60;
   self.timeLabel.hidden = YES;
   self.time = DEFAULT_TIME;
   
-  ((TimerView *)self.view).percentage = 1;
+  self.timerView.percentage = 1;
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  self.title = @"Timer";
+  
+  [self updateTitle];
+}
+
+- (void)updateTitle {
+  NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+  formatter.dateFormat = @"yyyyMMdd";
+  
+  NSInteger today = 0;
+  for (Record* record in self.records) {
+    if ([[formatter stringFromDate:record.date] isEqualToString:[formatter stringFromDate:[NSDate date]]]) {
+      today++;
+    }
+  }
+
+  if ([[NSBundle mainBundle].preferredLocalizations[0] isEqualToString:@"en"]) {
+    self.title = [NSString stringWithFormat:@"Today: %lu", today];
+  } else {
+    self.title = [NSString stringWithFormat:@"今日: %lu", today];
+  }
 }
 
 - (UILocalNotification *)finishNotification { // lazy init
@@ -58,15 +79,25 @@ const uint DEFAULT_TIME = 25 * 60;
   return ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
 }
 
-- (NSDateFormatter *)formatter {
+- (NSDateFormatter *)minAndSecFormatter {
   
-  if (!_formatter) {
-    _formatter = [[NSDateFormatter alloc] init];
+  if (!_minAndSecFormatter) {
+    _minAndSecFormatter = [[NSDateFormatter alloc] init];
   }
   
-  _formatter.dateFormat = @"HH:mm";
+  _minAndSecFormatter.dateFormat = @"HH:mm";
   
-  return _formatter;
+  return _minAndSecFormatter;
+}
+
+
+- (NSArray *)records {
+  NSArray* array;
+  
+  NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"Record"];
+  array = [self.context executeFetchRequest:request error:nil];
+  
+  return array;
 }
 
 - (IBAction)startTimer:(UIButton *)sender {
@@ -79,9 +110,9 @@ const uint DEFAULT_TIME = 25 * 60;
 }
 
 - (void)countdown:(NSTimer*)timer {
-  self.timeLabel.text = [self toTimeStringWith: --self.time];
+  self.timeLabel.text = [self timeStringWith: --self.time];
   if (self.time % 3 == 0) {
-    ((TimerView *)self.view).percentage = (double)self.time / (double)DEFAULT_TIME;
+    self.timerView.percentage = (double)self.time / (double)DEFAULT_TIME;
   }
   if (self.time == 0) {
     [timer invalidate];
@@ -93,17 +124,23 @@ const uint DEFAULT_TIME = 25 * 60;
   self.time = DEFAULT_TIME;
   self.startButton.hidden = NO;
   self.timeLabel.hidden = YES;
-  ((TimerView *)self.view).percentage = 1;
+  self.timerView.percentage = 1;
+  
+  [self appendCurrentNewRecord];
+  [self updateTitle];
+}
+
+- (void)appendCurrentNewRecord {
   
   NSEntityDescription* entity = [NSEntityDescription entityForName:@"Record"
                                             inManagedObjectContext:self.context];
   
   Record* r = [[Record alloc] initWithEntity:entity
               insertIntoManagedObjectContext:self.context];
-  r.starttime = [self.formatter stringFromDate:[NSDate date]];
-  r.endtime = [self.formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME]];
+  r.starttime = [self.minAndSecFormatter stringFromDate:[NSDate date]];
+  r.endtime = [self.minAndSecFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME]];
   r.date = [NSDate date];
-//  [self.context insertObject:r];
+  //  [self.context insertObject:r];
   [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
 }
 
@@ -112,7 +149,7 @@ const uint DEFAULT_TIME = 25 * 60;
   [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
-- (NSString *)toTimeStringWith:(NSUInteger)timeUInt {
+- (NSString *)timeStringWith:(NSUInteger)timeUInt {
   
   NSUInteger second = timeUInt % 60;
   NSUInteger minute = timeUInt / 60;
