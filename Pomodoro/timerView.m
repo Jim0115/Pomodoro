@@ -24,6 +24,7 @@ const uint SPACE = 5;
 
   UIBezierPath* round = [[UIBezierPath alloc] init];
   [round addArcWithCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)
+                                    // NOT self.center    self.center is the center of self.frame
                    radius:radius
                startAngle:-M_PI_2
                  endAngle:-M_PI_2 + M_PI * 2 * self.percentage

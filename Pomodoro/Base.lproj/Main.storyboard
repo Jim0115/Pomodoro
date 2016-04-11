@@ -55,6 +55,11 @@
                                         <include reference="4hU-dv-b2u"/>
                                     </mask>
                                 </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="4hU-dv-b2u"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -63,12 +68,16 @@
                             <constraint firstItem="iHA-UJ-ewl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QPO-Ja-NKW"/>
                             <constraint firstItem="iHA-UJ-ewl" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Rnp-tv-mze"/>
                             <constraint firstItem="iHA-UJ-ewl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xaj-Fa-dne"/>
-                            <constraint firstItem="iHA-UJ-ewl" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="veh-FQ-Wqf"/>
+                            <constraint firstItem="iHA-UJ-ewl" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="ZPN-l7-DO2"/>
+                            <constraint firstItem="iHA-UJ-ewl" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="mm1-Tg-HZC"/>
+                            <constraint firstItem="iHA-UJ-ewl" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.65" id="veh-FQ-Wqf"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="GSO-tH-kiO"/>
                                 <exclude reference="Rnp-tv-mze"/>
+                                <exclude reference="ZPN-l7-DO2"/>
+                                <exclude reference="mm1-Tg-HZC"/>
                                 <exclude reference="veh-FQ-Wqf"/>
                             </mask>
                         </variation>
@@ -81,6 +90,12 @@
                             <mask key="constraints">
                                 <include reference="GSO-tH-kiO"/>
                                 <include reference="Rnp-tv-mze"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="ZPN-l7-DO2"/>
+                                <include reference="mm1-Tg-HZC"/>
                             </mask>
                         </variation>
                     </view>
@@ -99,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054.5" y="338.5"/>
+            <point key="canvasLocation" x="1045.5" y="339"/>
         </scene>
         <!--History Table View Controller-->
         <scene sceneID="7fS-zQ-YGQ">

@@ -59,9 +59,9 @@ const uint DEFAULT_TIME = 10; // 25 * 60;
   }
 
   if ([[NSBundle mainBundle].preferredLocalizations[0] isEqualToString:@"en"]) {
-    self.title = [NSString stringWithFormat:@"Today: %lu", today];
+    self.title = [NSString stringWithFormat:@"Today: %ld", (long)today];
   } else {
-    self.title = [NSString stringWithFormat:@"今日: %lu", today];
+    self.title = [NSString stringWithFormat:@"今日: %ld", (long)today];
   }
 }
 
@@ -157,15 +157,15 @@ const uint DEFAULT_TIME = 10; // 25 * 60;
   NSString* string;
   
   if (minute < 10) {
-    string = [NSString stringWithFormat:@"0%lu:", minute];
+    string = [NSString stringWithFormat:@"0%lu:", (long)minute];
   } else {
-    string = [NSString stringWithFormat:@"%lu:", minute];
+    string = [NSString stringWithFormat:@"%lu:", (long)minute];
   }
   
   if (second < 10) {
-    string = [NSString stringWithFormat:@"%@0%lu", string, second];
+    string = [NSString stringWithFormat:@"%@0%lu", string, (long)second];
   } else {
-    string = [NSString stringWithFormat:@"%@%lu", string, second];
+    string = [NSString stringWithFormat:@"%@%lu", string, (long)second];
   }
   
   return string;
