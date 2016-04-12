@@ -8,3 +8,7 @@ A simple Pomodoro Timer in Objective-C.
 * ~~Launch screen and App Icon.~~
 * ~~store history by core data.~~
 * ~~Adapt to iPad and iPhone in landscape.~~
+
+### Version 1.0 Complete
+
+ * Add iCloud Kit to store records on cloud.

@@ -30,7 +30,7 @@
 
 @implementation ViewController
 
-const uint DEFAULT_TIME = 10; // 25 * 60;
+const uint DEFAULT_TIME = 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -106,7 +106,7 @@ const uint DEFAULT_TIME = 10; // 25 * 60;
   [self countdown:nil];
   NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countdown:) userInfo:nil repeats:true];
   timer.tolerance = 0.1;
-//  [self postNotification:self.finishNotification after:DEFAULT_TIME];
+  [self postNotification:self.finishNotification after:DEFAULT_TIME];
 }
 
 - (void)countdown:(NSTimer*)timer {
