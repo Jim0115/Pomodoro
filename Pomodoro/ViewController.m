@@ -26,11 +26,13 @@
 @property (nonatomic, readonly) NSManagedObjectContext* context;
 @property (nonatomic, readonly, copy) NSArray* records;
 
+@property (nonatomic) NSDate* finishDate;
+
 @end
 
 @implementation ViewController
 
-const uint DEFAULT_TIME = 25 * 60;
+static const uint DEFAULT_TIME = 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -45,6 +47,32 @@ const uint DEFAULT_TIME = 25 * 60;
   [super viewWillAppear:animated];
   
   [self updateTitle];
+  
+  __weak ViewController* weakSelf = self;
+  
+  [[NSNotificationCenter defaultCenter] addObserverForName:@"resign active"
+                                                    object:[UIApplication sharedApplication].delegate
+                                                     queue:[NSOperationQueue mainQueue]
+                                                usingBlock:^(NSNotification * _Nonnull note) {
+                                                  NSLog(@"%@", note.name);
+//                                                  [[NSUserDefaults standardUserDefaults] setObject:weakSelf.finishDate forKey:@"finish date"];
+                                                }];
+  
+  [[NSNotificationCenter defaultCenter] addObserverForName:@"become active"
+                                                    object:[UIApplication sharedApplication].delegate
+                                                     queue:[NSOperationQueue mainQueue]
+                                                usingBlock:^(NSNotification * _Nonnull note) {
+                                                  NSLog(@"%@", note.name);
+//                                                  NSLog(@"%@", (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:@"finish date"]);
+//                                                  weakSelf.time = [(NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:@"finish date"] timeIntervalSinceNow];
+                                                  weakSelf.time = [weakSelf.finishDate timeIntervalSinceNow] > 0 ? [weakSelf.finishDate timeIntervalSinceNow] : 0;
+                                                  [weakSelf.timerView setNeedsDisplay];
+                                                }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  [[NSNotificationCenter defaultCenter] removeObserver:@"resign active"];
 }
 
 - (void)updateTitle {
@@ -57,7 +85,7 @@ const uint DEFAULT_TIME = 25 * 60;
       today++;
     }
   }
-
+  
   if ([[NSBundle mainBundle].preferredLocalizations[0] isEqualToString:@"en"]) {
     self.title = [NSString stringWithFormat:@"Today: %ld", (long)today];
   } else {
@@ -90,7 +118,6 @@ const uint DEFAULT_TIME = 25 * 60;
   return _minAndSecFormatter;
 }
 
-
 - (NSArray *)records {
   NSArray* array;
   
@@ -101,12 +128,21 @@ const uint DEFAULT_TIME = 25 * 60;
 }
 
 - (IBAction)startTimer:(UIButton *)sender {
+  // UI
   sender.hidden = YES;
   self.timeLabel.hidden = NO;
+  
+  // count down
   [self countdown:nil];
   NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countdown:) userInfo:nil repeats:true];
   timer.tolerance = 0.1;
-  [self postNotification:self.finishNotification after:DEFAULT_TIME];
+  
+  // notification
+  //  [self postNotification:self.finishNotification after:DEFAULT_TIME];
+  
+  // set finish date
+  self.finishDate = [NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME];
+  
 }
 
 - (void)countdown:(NSTimer*)timer {
@@ -114,6 +150,7 @@ const uint DEFAULT_TIME = 25 * 60;
   if (self.time % 3 == 0) {
     self.timerView.percentage = (double)self.time / (double)DEFAULT_TIME;
   }
+  NSLog(@"%lu", _time);
   if (self.time == 0) {
     [timer invalidate];
     [self countdownDidFinish];
@@ -140,7 +177,7 @@ const uint DEFAULT_TIME = 25 * 60;
   r.starttime = [self.minAndSecFormatter stringFromDate:[NSDate date]];
   r.endtime = [self.minAndSecFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME]];
   r.date = [NSDate date];
-  //  [self.context insertObject:r];
+  
   [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
 }
 

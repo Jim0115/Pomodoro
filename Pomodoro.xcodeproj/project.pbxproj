@@ -163,12 +163,18 @@
 		CCF88F2F1CB3EFD700AED924 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "王仕杰";
 				TargetAttributes = {
 					CCF88F361CB3EFD700AED924 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = J84HL5BDK2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
