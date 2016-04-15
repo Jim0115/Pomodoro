@@ -33,7 +33,7 @@
 
 @implementation ViewController
 
-static const uint DEFAULT_TIME = 25 * 60;
+static const uint DEFAULT_TIME = 30;//25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -75,7 +75,7 @@ static const uint DEFAULT_TIME = 25 * 60;
                                                 }];
 }
 
- - (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
   [[NSNotificationCenter defaultCenter] removeObserver:@"resign active"];
   [[NSNotificationCenter defaultCenter] removeObserver:@"become active"];
@@ -109,30 +109,30 @@ static const uint DEFAULT_TIME = 25 * 60;
   return noti;
 }
 /*
-
-- (NSManagedObjectContext *)context {
-  return ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-}
-
-- (NSDateFormatter *)minAndSecFormatter {
-  
-  if (!_minAndSecFormatter) {
-    _minAndSecFormatter = [[NSDateFormatter alloc] init];
-  }
-  
-  _minAndSecFormatter.dateFormat = @"HH:mm";
-  
-  return _minAndSecFormatter;
-}
-
-- (NSArray *)records {
-  NSArray* array;
-  
-  NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"Record"];
-  array = [self.context executeFetchRequest:request error:nil];
-  
-  return array;
-}*/
+ 
+ - (NSManagedObjectContext *)context {
+ return ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+ }
+ 
+ - (NSDateFormatter *)minAndSecFormatter {
+ 
+ if (!_minAndSecFormatter) {
+ _minAndSecFormatter = [[NSDateFormatter alloc] init];
+ }
+ 
+ _minAndSecFormatter.dateFormat = @"HH:mm";
+ 
+ return _minAndSecFormatter;
+ }
+ 
+ - (NSArray *)records {
+ NSArray* array;
+ 
+ NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"Record"];
+ array = [self.context executeFetchRequest:request error:nil];
+ 
+ return array;
+ }*/
 
 - (IBAction)startTimer:(UIButton *)sender {
   // UI
@@ -158,9 +158,9 @@ static const uint DEFAULT_TIME = 25 * 60;
 
 - (void)countdown:(NSTimer*)timer {
   self.timeLabel.text = [self timeStringWith: --self.time];
-//  if (self.time % 3 == 0) {
-    self.timerView.percentage = (double)self.time / (double)DEFAULT_TIME;
-//  }
+  //  if (self.time % 3 == 0) {
+  self.timerView.percentage = (double)self.time / (double)DEFAULT_TIME;
+  //  }
   NSLog(@"%lu", _time);
   if (self.time <= 0) {
     [timer invalidate];
@@ -175,25 +175,34 @@ static const uint DEFAULT_TIME = 25 * 60;
   self.timerView.percentage = 1;
   self.finishDate = nil;
   
-//  [self appendCurrentNewRecord];
+  //  [self appendCurrentNewRecord];
   [self updateTitle];
 }
 
 /*
-- (void)appendCurrentNewRecord {
-  
-  NSEntityDescription* entity = [NSEntityDescription entityForName:@"Record"
-                                            inManagedObjectContext:self.context];
-  
-  Record* r = [[Record alloc] initWithEntity:entity
-              insertIntoManagedObjectContext:self.context];
-  r.starttime = [self.minAndSecFormatter stringFromDate:[NSDate date]];
-  r.endtime = [self.minAndSecFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME]];
-  r.date = [NSDate date];
-  
-  [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
+ - (void)appendCurrentNewRecord {
+ 
+ NSEntityDescription* entity = [NSEntityDescription entityForName:@"Record"
+ inManagedObjectContext:self.context];
+ 
+ Record* r = [[Record alloc] initWithEntity:entity
+ insertIntoManagedObjectContext:self.context];
+ r.starttime = [self.minAndSecFormatter stringFromDate:[NSDate date]];
+ r.endtime = [self.minAndSecFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME]];
+ r.date = [NSDate date];
+ 
+ [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
+ }
+ */
+
+- (IBAction)showNoti:(id)sender {
+  NSLog(@"%@", [[UIApplication sharedApplication] scheduledLocalNotifications]);
+  UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Notificaitions"
+                                                                  message:[NSString stringWithFormat:@"%@", [[UIApplication sharedApplication] scheduledLocalNotifications]] preferredStyle:UIAlertControllerStyleAlert];
+  [alert addAction:[UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleCancel handler:nil]];
+  [self presentViewController:alert animated:YES completion:nil];
 }
-*/
+
 
 - (NSString *)timeStringWith:(NSUInteger)timeUInt {
   
