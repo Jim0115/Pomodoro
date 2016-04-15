@@ -42,12 +42,6 @@ static const uint DEFAULT_TIME = 30;//25 * 60;
   self.time = DEFAULT_TIME;
   
   self.timerView.percentage = 1;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-  
-  [self updateTitle];
   
   __weak ViewController* weakSelf = self;
   
@@ -66,6 +60,8 @@ static const uint DEFAULT_TIME = 30;//25 * 60;
                                                   if (weakSelf.time < 0 || weakSelf.time > DEFAULT_TIME) {
                                                     //finished
                                                     [weakSelf resetStatus];
+                                                    [weakSelf updateTitle];
+                                                    [weakSelf appendCurrentNewRecord];
                                                   } else {
                                                     // not finish
                                                     weakSelf.time = [weakSelf.finishDate timeIntervalSinceNow];
@@ -75,11 +71,14 @@ static const uint DEFAULT_TIME = 30;//25 * 60;
                                                 }];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-  [super viewWillDisappear:animated];
-  [[NSNotificationCenter defaultCenter] removeObserver:@"resign active"];
-  [[NSNotificationCenter defaultCenter] removeObserver:@"become active"];
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  
+  [self updateTitle];
+  
 }
+
+#pragma mark - UI
 
 - (void)updateTitle {
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -92,12 +91,28 @@ static const uint DEFAULT_TIME = 30;//25 * 60;
     }
   }
   
-  if ([[NSBundle mainBundle].preferredLocalizations[0] isEqualToString:@"en"]) {
+  if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"en"]) {
     self.title = [NSString stringWithFormat:@"Today: %ld", (long)today];
   } else {
     self.title = [NSString stringWithFormat:@"今日: %ld", (long)today];
   }
 }
+
+- (void)resetStatus {
+  self.time = DEFAULT_TIME;
+  self.startButton.hidden = NO;
+  self.timeLabel.hidden = YES;
+  self.timerView.percentage = 1;
+  self.finishDate = nil;
+  
+  [self appendCurrentNewRecord];
+  [self updateTitle];
+  
+  NSNotification* noti = [NSNotification notificationWithName:@"count down finished" object:nil];
+  [[NSNotificationCenter defaultCenter] postNotification:noti];
+}
+
+#pragma mark - LocalNotifiacation
 
 - (UILocalNotification *)finishNotification { // factory
   
@@ -108,31 +123,11 @@ static const uint DEFAULT_TIME = 30;//25 * 60;
   
   return noti;
 }
-/*
- 
- - (NSManagedObjectContext *)context {
- return ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
- }
- 
- - (NSDateFormatter *)minAndSecFormatter {
- 
- if (!_minAndSecFormatter) {
- _minAndSecFormatter = [[NSDateFormatter alloc] init];
- }
- 
- _minAndSecFormatter.dateFormat = @"HH:mm";
- 
- return _minAndSecFormatter;
- }
- 
- - (NSArray *)records {
- NSArray* array;
- 
- NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"Record"];
- array = [self.context executeFetchRequest:request error:nil];
- 
- return array;
- }*/
+
+
+
+#pragma mark - Timer
+
 
 - (IBAction)startTimer:(UIButton *)sender {
   // UI
@@ -168,41 +163,15 @@ static const uint DEFAULT_TIME = 30;//25 * 60;
   }
 }
 
-- (void)resetStatus {
-  self.time = DEFAULT_TIME;
-  self.startButton.hidden = NO;
-  self.timeLabel.hidden = YES;
-  self.timerView.percentage = 1;
-  self.finishDate = nil;
-  
-  //  [self appendCurrentNewRecord];
-  [self updateTitle];
-}
-
-/*
- - (void)appendCurrentNewRecord {
- 
- NSEntityDescription* entity = [NSEntityDescription entityForName:@"Record"
- inManagedObjectContext:self.context];
- 
- Record* r = [[Record alloc] initWithEntity:entity
- insertIntoManagedObjectContext:self.context];
- r.starttime = [self.minAndSecFormatter stringFromDate:[NSDate date]];
- r.endtime = [self.minAndSecFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME]];
- r.date = [NSDate date];
- 
- [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
- }
- */
-
 - (IBAction)showNoti:(id)sender {
   NSLog(@"%@", [[UIApplication sharedApplication] scheduledLocalNotifications]);
   UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Notificaitions"
-                                                                  message:[NSString stringWithFormat:@"%@", [[UIApplication sharedApplication] scheduledLocalNotifications]] preferredStyle:UIAlertControllerStyleAlert];
+                                                                 message:[NSString stringWithFormat:@"%@", [[UIApplication sharedApplication] scheduledLocalNotifications]] preferredStyle:UIAlertControllerStyleAlert];
   [alert addAction:[UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleCancel handler:nil]];
   [self presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark - Deal with strings
 
 - (NSString *)timeStringWith:(NSUInteger)timeUInt {
   
@@ -226,4 +195,43 @@ static const uint DEFAULT_TIME = 30;//25 * 60;
   return string;
 }
 
+#pragma mark - Core Data
+
+- (void)appendCurrentNewRecord {
+  
+  NSEntityDescription* entity = [NSEntityDescription entityForName:@"Record"
+                                            inManagedObjectContext:self.context];
+  
+  Record* r = [[Record alloc] initWithEntity:entity
+              insertIntoManagedObjectContext:self.context];
+  r.starttime = [self.minAndSecFormatter stringFromDate:[NSDate date]];
+  r.endtime = [self.minAndSecFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME]];
+  r.date = [NSDate date];
+  
+  [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
+}
+
+- (NSManagedObjectContext *)context {
+  return ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+}
+
+- (NSDateFormatter *)minAndSecFormatter {
+  
+  if (!_minAndSecFormatter) {
+    _minAndSecFormatter = [[NSDateFormatter alloc] init];
+  }
+  
+  _minAndSecFormatter.dateFormat = @"HH:mm";
+  
+  return _minAndSecFormatter;
+}
+
+- (NSArray *)records {
+  NSArray* array;
+  
+  NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"Record"];
+  array = [self.context executeFetchRequest:request error:nil];
+  
+  return array;
+}
 @end

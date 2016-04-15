@@ -16,10 +16,33 @@
 @property (nonatomic, readonly, copy) NSArray* records;
 @property (nonatomic, copy) NSArray* processedByMonth;
 
+@property (nonatomic) id observer;
+
 @end
 
 @implementation HistoryTableViewController
 
+#pragma mark - vc life cycle
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  
+  __weak UITableView* weakView = self.tableView;
+  
+  self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:@"count down finished"
+                                                    object:nil
+                                                     queue:[NSOperationQueue mainQueue]
+                                                usingBlock:^(NSNotification * _Nonnull note) {
+                                                  NSLog(@"%@", note.name);
+//                                                  weakSelf.processedByMonth;
+                                                  [weakView reloadData];
+  }];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+  [super viewDidDisappear:animated];
+  [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+}
 
 #pragma mark - core date RW
 
@@ -57,23 +80,6 @@
   }
   return processed;
 }
-
-//- (NSUInteger)countOfDifferentMonthIn:(NSArray *)array {
-//  NSMutableArray* months = [[NSMutableArray alloc] init];
-//  NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-//  formatter.dateFormat = @"yyyy MM";
-//  for (id obj in array) {
-//    if ([obj isKindOfClass: [Record class]]) {
-//      Record* r = (Record *)obj;
-//      NSString* s = [formatter stringFromDate:r.date];
-//      if (![months indexOfObject:s]) {
-//        [months addObject:s];
-//      }
-//    }
-//  }
-//  return months.count;
-//}
-
 
 #pragma mark - Table view data source
 

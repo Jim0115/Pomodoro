@@ -14,4 +14,4 @@ A simple Pomodoro Timer in Objective-C.
  * Add iCloud Kit to store records on cloud.
  
 #  April 13, 2016 BUG
-**Timer stoped when App enter background.** Solving...
+~~**Timer stoped when App enter background.** Solved~~
