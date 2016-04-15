@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet TimerView *timerView;
 
-@property (nonatomic) NSUInteger time;
+@property (nonatomic) NSInteger time;
 
 @property (nonatomic, readonly) UILocalNotification* finishNotification;
 
@@ -25,6 +25,7 @@
 
 @property (nonatomic, readonly) NSManagedObjectContext* context;
 @property (nonatomic, readonly, copy) NSArray* records;
+@property (nonatomic) NSTimer* timer;
 
 @property (nonatomic) NSDate* finishDate;
 
@@ -55,7 +56,6 @@ static const uint DEFAULT_TIME = 25 * 60;
                                                      queue:[NSOperationQueue mainQueue]
                                                 usingBlock:^(NSNotification * _Nonnull note) {
                                                   NSLog(@"%@", note.name);
-//                                                  [[NSUserDefaults standardUserDefaults] setObject:weakSelf.finishDate forKey:@"finish date"];
                                                 }];
   
   [[NSNotificationCenter defaultCenter] addObserverForName:@"become active"
@@ -63,16 +63,22 @@ static const uint DEFAULT_TIME = 25 * 60;
                                                      queue:[NSOperationQueue mainQueue]
                                                 usingBlock:^(NSNotification * _Nonnull note) {
                                                   NSLog(@"%@", note.name);
-//                                                  NSLog(@"%@", (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:@"finish date"]);
-//                                                  weakSelf.time = [(NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:@"finish date"] timeIntervalSinceNow];
-                                                  weakSelf.time = [weakSelf.finishDate timeIntervalSinceNow] > 0 ? [weakSelf.finishDate timeIntervalSinceNow] : 0;
-                                                  [weakSelf.timerView setNeedsDisplay];
+                                                  if (weakSelf.time < 0 || weakSelf.time > DEFAULT_TIME) {
+                                                    //finished
+                                                    [weakSelf resetStatus];
+                                                  } else {
+                                                    // not finish
+                                                    weakSelf.time = [weakSelf.finishDate timeIntervalSinceNow];
+                                                    [weakSelf.timerView setNeedsDisplay];
+                                                  }
+                                                  NSLog(@"interval = %f", [weakSelf.finishDate timeIntervalSinceNow]);
                                                 }];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+ - (void)viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
   [[NSNotificationCenter defaultCenter] removeObserver:@"resign active"];
+  [[NSNotificationCenter defaultCenter] removeObserver:@"become active"];
 }
 
 - (void)updateTitle {
@@ -93,7 +99,7 @@ static const uint DEFAULT_TIME = 25 * 60;
   }
 }
 
-- (UILocalNotification *)finishNotification { // lazy init
+- (UILocalNotification *)finishNotification { // factory
   
   UILocalNotification* noti = [[UILocalNotification alloc] init];
   
@@ -102,6 +108,7 @@ static const uint DEFAULT_TIME = 25 * 60;
   
   return noti;
 }
+/*
 
 - (NSManagedObjectContext *)context {
   return ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -125,7 +132,7 @@ static const uint DEFAULT_TIME = 25 * 60;
   array = [self.context executeFetchRequest:request error:nil];
   
   return array;
-}
+}*/
 
 - (IBAction)startTimer:(UIButton *)sender {
   // UI
@@ -133,40 +140,46 @@ static const uint DEFAULT_TIME = 25 * 60;
   self.timeLabel.hidden = NO;
   
   // count down
+  self.time = DEFAULT_TIME;
   [self countdown:nil];
-  NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countdown:) userInfo:nil repeats:true];
-  timer.tolerance = 0.1;
-  
-  // notification
-  //  [self postNotification:self.finishNotification after:DEFAULT_TIME];
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countdown:) userInfo:nil repeats:true];
+  self.timer.tolerance = 0.1;
   
   // set finish date
   self.finishDate = [NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME];
+  
+  // local notification
+  NSLog(@"curr:%@ fin:%@", [NSDate date], self.finishDate);
+  UILocalNotification* noti = [self.finishNotification copy];
+  noti.fireDate = _finishDate;
+  [[UIApplication sharedApplication] scheduleLocalNotification:noti];
   
 }
 
 - (void)countdown:(NSTimer*)timer {
   self.timeLabel.text = [self timeStringWith: --self.time];
-  if (self.time % 3 == 0) {
+//  if (self.time % 3 == 0) {
     self.timerView.percentage = (double)self.time / (double)DEFAULT_TIME;
-  }
+//  }
   NSLog(@"%lu", _time);
-  if (self.time == 0) {
+  if (self.time <= 0) {
     [timer invalidate];
-    [self countdownDidFinish];
+    [self resetStatus];
   }
 }
 
-- (void)countdownDidFinish {
+- (void)resetStatus {
   self.time = DEFAULT_TIME;
   self.startButton.hidden = NO;
   self.timeLabel.hidden = YES;
   self.timerView.percentage = 1;
+  self.finishDate = nil;
   
-  [self appendCurrentNewRecord];
+//  [self appendCurrentNewRecord];
   [self updateTitle];
 }
 
+/*
 - (void)appendCurrentNewRecord {
   
   NSEntityDescription* entity = [NSEntityDescription entityForName:@"Record"
@@ -180,11 +193,7 @@ static const uint DEFAULT_TIME = 25 * 60;
   
   [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
 }
-
-- (void)postNotification:(UILocalNotification *)notification after: (NSUInteger)time {
-  [notification setFireDate:[NSDate dateWithTimeIntervalSinceNow:time]];
-  [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-}
+*/
 
 - (NSString *)timeStringWith:(NSUInteger)timeUInt {
   
