@@ -1,6 +1,14 @@
 # Pomodoro
 A simple Pomodoro Timer in Objective-C.
-  
+
+### iPhone
+![image](http://7xt1ag.com1.z0.glb.clouddn.com/Simulator%20Screen%20Shot%20Apr%2016%2C%202016%2C%2009.04.30.png)
+![image](http://7xt1ag.com1.z0.glb.clouddn.com/Simulator%20Screen%20Shot%20Apr%2016%2C%202016%2C%2009.05.08.png)
+### iPad
+#### portrait
+![image](http://7xt1ag.com1.z0.glb.clouddn.com/Simulator%20Screen%20Shot%20Apr%2016%2C%202016%2C%2009.07.25.png)
+#### landscape
+![image](http://7xt1ag.com1.z0.glb.clouddn.com/Simulator%20Screen%20Shot%20Apr%2016%2C%202016%2C%2009.07.29.png)
   
 ## TODO:
 * ~~Add animation when counting down.~~
@@ -39,3 +47,7 @@ implementation of HistorySegue:
 	  }
 	}
 	
+### Adaptation of iPhone and iPad
+By using Size Classes:  
+![image](http://7xt1ag.com1.z0.glb.clouddn.com/Screen%20Shot%202016-04-16%20at%2008.55.35.png)  
+Set different constraints in different size classes
