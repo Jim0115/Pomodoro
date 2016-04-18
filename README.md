@@ -16,12 +16,9 @@ A simple Pomodoro Timer in Objective-C.
 * ~~Launch screen and App Icon.~~
 * ~~store history by core data.~~
 * ~~Adapt to iPad and iPhone in landscape.~~
+* Add iCloud Kit to store records on cloud.
 
-### Version 1.0 Complete
-
- * Add iCloud Kit to store records on cloud.
- 
-#  April 13, 2016 BUG
+###  April 13, 2016 BUG
 ~~**Timer stoped when App enter background.** Solved~~
 
 
@@ -31,7 +28,8 @@ A simple Pomodoro Timer in Objective-C.
 By using custom sugue:  
 ![image](http://7xt1ag.com1.z0.glb.clouddn.com/Screen%20Shot%202016-04-16%20at%2008.32.46.png)  
 
-implementation of HistorySegue:  
+implementation of HistorySegue:    
+Override `- (void)perform` method of `UIStoryboardSegue` Class.
 
 	- (void)perform {
 	  if ([[UIDevice currentDevice].model isEqualToString:@"iPhone"]) {

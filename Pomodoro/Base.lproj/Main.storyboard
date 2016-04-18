@@ -100,11 +100,6 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="IDP-oD-aKJ">
-                        <barButtonItem key="leftBarButtonItem" title="Show" id="hyd-Mz-p8f">
-                            <connections>
-                                <action selector="showNoti:" destination="BYZ-38-t0r" id="u5O-U6-bS1"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="History" id="ama-FN-ILM">
                             <connections>
                                 <segue destination="k5a-Aj-B40" kind="custom" identifier="show history" customClass="HistorySegue" id="TdS-7W-NUQ"/>

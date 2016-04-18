@@ -34,7 +34,6 @@
                                                      queue:[NSOperationQueue mainQueue]
                                                 usingBlock:^(NSNotification * _Nonnull note) {
                                                   NSLog(@"%@", note.name);
-//                                                  weakSelf.processedByMonth;
                                                   [weakView reloadData];
   }];
 }
@@ -42,6 +41,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
   [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+  NSLog(@"%d", [[NSNotificationCenter alloc] init] == [NSNotificationCenter defaultCenter]);
 }
 
 #pragma mark - core date RW

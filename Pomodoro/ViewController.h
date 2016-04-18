@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
++ (NSString *)timeStringWith:(NSUInteger)timeUInt;
 
 @end
 

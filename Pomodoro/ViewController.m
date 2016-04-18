@@ -33,7 +33,7 @@
 
 @implementation ViewController
 
-static const uint DEFAULT_TIME = 30;//25 * 60;
+static const uint DEFAULT_TIME = 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -152,7 +152,7 @@ static const uint DEFAULT_TIME = 30;//25 * 60;
 }
 
 - (void)countdown:(NSTimer*)timer {
-  self.timeLabel.text = [self timeStringWith: --self.time];
+  self.timeLabel.text = [ViewController timeStringWith: --self.time];
   //  if (self.time % 3 == 0) {
   self.timerView.percentage = (double)self.time / (double)DEFAULT_TIME;
   //  }
@@ -163,17 +163,9 @@ static const uint DEFAULT_TIME = 30;//25 * 60;
   }
 }
 
-- (IBAction)showNoti:(id)sender {
-  NSLog(@"%@", [[UIApplication sharedApplication] scheduledLocalNotifications]);
-  UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Notificaitions"
-                                                                 message:[NSString stringWithFormat:@"%@", [[UIApplication sharedApplication] scheduledLocalNotifications]] preferredStyle:UIAlertControllerStyleAlert];
-  [alert addAction:[UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleCancel handler:nil]];
-  [self presentViewController:alert animated:YES completion:nil];
-}
-
 #pragma mark - Deal with strings
 
-- (NSString *)timeStringWith:(NSUInteger)timeUInt {
++ (NSString *)timeStringWith:(NSUInteger)timeUInt {
   
   NSUInteger second = timeUInt % 60;
   NSUInteger minute = timeUInt / 60;
