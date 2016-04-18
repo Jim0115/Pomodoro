@@ -27,13 +27,14 @@
 @property (nonatomic, readonly, copy) NSArray* records;
 @property (nonatomic) NSTimer* timer;
 
+@property (nonatomic) NSDate* startDate;
 @property (nonatomic) NSDate* finishDate;
 
 @end
 
 @implementation ViewController
 
-static const uint DEFAULT_TIME = 25 * 60;
+static const uint DEFAULT_TIME = 300; // 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -99,14 +100,14 @@ static const uint DEFAULT_TIME = 25 * 60;
 }
 
 - (void)resetStatus {
+  [self appendCurrentNewRecord];
+  [self updateTitle];
+  
   self.time = DEFAULT_TIME;
   self.startButton.hidden = NO;
   self.timeLabel.hidden = YES;
   self.timerView.percentage = 1;
   self.finishDate = nil;
-  
-  [self appendCurrentNewRecord];
-  [self updateTitle];
   
   NSNotification* noti = [NSNotification notificationWithName:@"count down finished" object:nil];
   [[NSNotificationCenter defaultCenter] postNotification:noti];
@@ -140,11 +141,12 @@ static const uint DEFAULT_TIME = 25 * 60;
   self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countdown:) userInfo:nil repeats:true];
   self.timer.tolerance = 0.1;
   
-  // set finish date
+  // set date
+  self.startDate = [NSDate date];
   self.finishDate = [NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME];
   
   // local notification
-  NSLog(@"curr:%@ fin:%@", [NSDate date], self.finishDate);
+  NSLog(@"curr:%@ fin:%@", self.startDate, self.finishDate);
   UILocalNotification* noti = [self.finishNotification copy];
   noti.fireDate = _finishDate;
   [[UIApplication sharedApplication] scheduleLocalNotification:noti];
@@ -156,7 +158,7 @@ static const uint DEFAULT_TIME = 25 * 60;
   //  if (self.time % 3 == 0) {
   self.timerView.percentage = (double)self.time / (double)DEFAULT_TIME;
   //  }
-  NSLog(@"%lu", _time);
+  NSLog(@"time: %lu", _time);
   if (self.time <= 0) {
     [timer invalidate];
     [self resetStatus];
@@ -196,8 +198,8 @@ static const uint DEFAULT_TIME = 25 * 60;
   
   Record* r = [[Record alloc] initWithEntity:entity
               insertIntoManagedObjectContext:self.context];
-  r.starttime = [self.minAndSecFormatter stringFromDate:[NSDate date]];
-  r.endtime = [self.minAndSecFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:DEFAULT_TIME]];
+  r.starttime = [self.minAndSecFormatter stringFromDate:self.startDate];
+  r.endtime = [self.minAndSecFormatter stringFromDate:self.finishDate];
   r.date = [NSDate date];
   
   [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];

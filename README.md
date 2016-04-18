@@ -20,6 +20,8 @@ A simple Pomodoro Timer in Objective-C.
 
 ###  April 13, 2016 BUG
 ~~**Timer stoped when App enter background.** Solved~~
+### April 18, 2016
+~~Start and end time Error.~~
 
 
 
