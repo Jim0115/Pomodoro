@@ -34,7 +34,7 @@
 
 @implementation ViewController
 
-static const uint DEFAULT_TIME = 300; // 25 * 60;
+static const uint DEFAULT_TIME = 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];

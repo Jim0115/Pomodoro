@@ -41,7 +41,6 @@
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
   [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
-  NSLog(@"%d", [[NSNotificationCenter alloc] init] == [NSNotificationCenter defaultCenter]);
 }
 
 #pragma mark - core date RW
@@ -56,7 +55,7 @@
   NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"Record"];
   array = [self.context executeFetchRequest:request error:nil];
   
-  return array;
+  return [[array reverseObjectEnumerator] allObjects];
 }
 
 - (NSArray *)processedByMonth {
@@ -64,7 +63,7 @@
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
   NSArray* records = self.records;
   NSMutableArray* processed = [[NSMutableArray alloc] init];
-  formatter.dateFormat = @"yyyy MM";
+  formatter.dateFormat = @"yyyy MM dd";
   for (id obj in records) {
     if ([obj isKindOfClass: [Record class]]) {
       Record* r = (Record *)obj;
@@ -98,13 +97,7 @@
   
   Record* record = self.records[indexPath.row];
   
-  NSDate* date = record.date;
-  
-  NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-  formatter.dateFormat = @"dd";
-  
-  
-  NSString* info = [NSString stringWithFormat:@"%@  %@ -- %@",[formatter stringFromDate:date], record.starttime, record.endtime];
+  NSString* info = [NSString stringWithFormat:@"%@ -- %@", record.starttime, record.endtime];
   
   cell.textLabel.text = info;
   
@@ -116,7 +109,7 @@
   NSArray* currentMonthArray = (NSArray *)self.processedByMonth[section];
   Record* record = (Record *)currentMonthArray.firstObject;
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-  formatter.dateFormat = @"   MMM yyyy";
+  formatter.dateFormat = @"   MMM dd, yyyy";
   header.text = [formatter stringFromDate:record.date];
   return header;
 }
