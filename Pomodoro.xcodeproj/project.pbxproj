@@ -12,6 +12,7 @@
 		CC653C771CB9CF87008D1239 /* HistorySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CC653C761CB9CF87008D1239 /* HistorySegue.m */; };
 		CCB490481CB6502A00E8A919 /* TimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB490471CB6502A00E8A919 /* TimerView.m */; };
 		CCB490511CB75CB700E8A919 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB490501CB75CB700E8A919 /* HistoryTableViewController.m */; };
+		CCCA2A251CC4760A00DF8D63 /* PomodoroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCA2A241CC4760A00DF8D63 /* PomodoroTests.m */; };
 		CCD4442E1CB9DF2400C71556 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CCD444301CB9DF2400C71556 /* InfoPlist.strings */; };
 		CCF88F3C1CB3EFD700AED924 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F3B1CB3EFD700AED924 /* main.m */; };
 		CCF88F3F1CB3EFD700AED924 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F3E1CB3EFD700AED924 /* AppDelegate.m */; };
@@ -21,6 +22,16 @@
 		CCF88F4A1CB3EFD700AED924 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCF88F491CB3EFD700AED924 /* Assets.xcassets */; };
 		CCF88F4D1CB3EFD700AED924 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF88F4B1CB3EFD700AED924 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CCCA2A1F1CC4759200DF8D63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCF88F2F1CB3EFD700AED924 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCF88F361CB3EFD700AED924;
+			remoteInfo = Pomodoro;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CC2654AA1CB7B66C00F5DC84 /* Record+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -33,6 +44,9 @@
 		CCB490471CB6502A00E8A919 /* TimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TimerView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CCB4904F1CB75CB700E8A919 /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
 		CCB490501CB75CB700E8A919 /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
+		CCCA2A1A1CC4759200DF8D63 /* PomodoroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCCA2A1E1CC4759200DF8D63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCCA2A241CC4760A00DF8D63 /* PomodoroTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomodoroTests.m; sourceTree = "<group>"; };
 		CCD4442A1CB9DE2F00C71556 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		CCD4442F1CB9DF2400C71556 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CCD444311CB9DF2500C71556 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -51,6 +65,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CCCA2A171CC4759200DF8D63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCF88F341CB3EFD700AED924 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,10 +117,20 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		CCCA2A1B1CC4759200DF8D63 /* PomodoroTests */ = {
+			isa = PBXGroup;
+			children = (
+				CCCA2A1E1CC4759200DF8D63 /* Info.plist */,
+				CCCA2A241CC4760A00DF8D63 /* PomodoroTests.m */,
+			);
+			path = PomodoroTests;
+			sourceTree = "<group>";
+		};
 		CCF88F2E1CB3EFD700AED924 = {
 			isa = PBXGroup;
 			children = (
 				CCF88F391CB3EFD700AED924 /* Pomodoro */,
+				CCCA2A1B1CC4759200DF8D63 /* PomodoroTests */,
 				CCF88F381CB3EFD700AED924 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				CCF88F371CB3EFD700AED924 /* Pomodoro.app */,
+				CCCA2A1A1CC4759200DF8D63 /* PomodoroTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +172,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CCCA2A191CC4759200DF8D63 /* PomodoroTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCCA2A211CC4759200DF8D63 /* Build configuration list for PBXNativeTarget "PomodoroTests" */;
+			buildPhases = (
+				CCCA2A161CC4759200DF8D63 /* Sources */,
+				CCCA2A171CC4759200DF8D63 /* Frameworks */,
+				CCCA2A181CC4759200DF8D63 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CCCA2A201CC4759200DF8D63 /* PBXTargetDependency */,
+			);
+			name = PomodoroTests;
+			productName = PomodoroTests;
+			productReference = CCCA2A1A1CC4759200DF8D63 /* PomodoroTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CCF88F361CB3EFD700AED924 /* Pomodoro */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCF88F511CB3EFD700AED924 /* Build configuration list for PBXNativeTarget "Pomodoro" */;
@@ -167,6 +217,11 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "王仕杰";
 				TargetAttributes = {
+					CCCA2A191CC4759200DF8D63 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = J84HL5BDK2;
+						TestTargetID = CCF88F361CB3EFD700AED924;
+					};
 					CCF88F361CB3EFD700AED924 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = J84HL5BDK2;
@@ -193,11 +248,19 @@
 			projectRoot = "";
 			targets = (
 				CCF88F361CB3EFD700AED924 /* Pomodoro */,
+				CCCA2A191CC4759200DF8D63 /* PomodoroTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CCCA2A181CC4759200DF8D63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCF88F351CB3EFD700AED924 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -212,6 +275,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CCCA2A161CC4759200DF8D63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCCA2A251CC4760A00DF8D63 /* PomodoroTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCF88F331CB3EFD700AED924 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -229,6 +300,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CCCA2A201CC4759200DF8D63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCF88F361CB3EFD700AED924 /* Pomodoro */;
+			targetProxy = CCCA2A1F1CC4759200DF8D63 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CCD444301CB9DF2400C71556 /* InfoPlist.strings */ = {
@@ -261,6 +340,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CCCA2A221CC4759200DF8D63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PomodoroTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.neu.wangshijie.PomodoroTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pomodoro.app/Pomodoro";
+			};
+			name = Debug;
+		};
+		CCCA2A231CC4759200DF8D63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PomodoroTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.neu.wangshijie.PomodoroTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pomodoro.app/Pomodoro";
+			};
+			name = Release;
+		};
 		CCF88F4F1CB3EFD700AED924 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -349,10 +452,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Pomodoro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.neu.wangshijie.Pomodoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pomodoro/Pomodoro-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -360,16 +466,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Pomodoro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.neu.wangshijie.Pomodoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pomodoro/Pomodoro-Bridging-Header.h";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CCCA2A211CC4759200DF8D63 /* Build configuration list for PBXNativeTarget "PomodoroTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCCA2A221CC4759200DF8D63 /* Debug */,
+				CCCA2A231CC4759200DF8D63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CCF88F321CB3EFD700AED924 /* Build configuration list for PBXProject "Pomodoro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
