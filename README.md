@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Jim0115/Pomodoro.svg?branch=master)](https://travis-ci.org/Jim0115/Pomodoro)
 # Pomodoro
 A simple Pomodoro Timer in Objective-C.
 
