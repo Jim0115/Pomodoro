@@ -63,6 +63,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="iHA-UJ-ewl" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="GSO-tH-kiO"/>
                             <constraint firstItem="iHA-UJ-ewl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QPO-Ja-NKW"/>
@@ -98,6 +99,9 @@
                                 <include reference="mm1-Tg-HZC"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="3ch-R1-QCE" appends="YES" id="dLP-CT-Tjp"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="IDP-oD-aKJ">
                         <barButtonItem key="rightBarButtonItem" title="History" id="ama-FN-ILM">
@@ -113,6 +117,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="3ch-R1-QCE">
+                    <connections>
+                        <action selector="swipe:" destination="BYZ-38-t0r" id="LxS-6X-Y3i"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1045.5" y="339"/>
         </scene>

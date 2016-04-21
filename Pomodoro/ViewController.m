@@ -228,4 +228,15 @@ static const uint DEFAULT_TIME = 25 * 60;
   
   return array;
 }
+
+#pragma mark - Gesture
+
+- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
+  if (sender.state == UIGestureRecognizerStateRecognized) {
+    if ([[UIDevice currentDevice].model isEqualToString:@"iPhone"]) {
+      [self performSegueWithIdentifier:@"show history" sender:self];
+    }
+  }
+}
+
 @end
