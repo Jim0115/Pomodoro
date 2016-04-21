@@ -40,6 +40,7 @@ static const uint DEFAULT_TIME = 25 * 60;
   [super viewDidLoad];
   
   self.timeLabel.hidden = YES;
+  self.timeLabel.backgroundColor = [UIColor whiteColor];
   self.time = DEFAULT_TIME;
   
   self.timerView.percentage = 1;
@@ -158,7 +159,7 @@ static const uint DEFAULT_TIME = 25 * 60;
   //  if (self.time % 3 == 0) {
   self.timerView.percentage = (double)self.time / (double)DEFAULT_TIME;
   //  }
-  NSLog(@"time: %lu", _time);
+  NSLog(@"time: %ld", (long)_time);
   if (self.time <= 0) {
     [timer invalidate];
     [self resetStatus];

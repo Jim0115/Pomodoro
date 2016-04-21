@@ -111,6 +111,7 @@
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
   formatter.dateFormat = @"   MMM dd, yyyy";
   header.text = [formatter stringFromDate:record.date];
+  header.backgroundColor = [UIColor whiteColor];
   return header;
 }
 
