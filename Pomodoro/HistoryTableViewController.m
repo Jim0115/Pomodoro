@@ -8,15 +8,20 @@
 
 #import "HistoryTableViewController.h"
 #import "AppDelegate.h"
+#import "RecordView.h"
+#import "RecordCell.h"
+#import "Record.h"
+#import "DetailTableViewController.h"
 #import <CoreData/CoreData.h>
 
 @interface HistoryTableViewController ()
 
 @property (nonatomic, readonly) NSManagedObjectContext* context;
 @property (nonatomic, readonly, copy) NSArray* records;
-@property (nonatomic, copy) NSArray* processedByMonth;
+@property (nonatomic, copy) NSArray* processedByDate;
 
 @property (nonatomic) id observer;
+
 
 @end
 
@@ -27,20 +32,24 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.title = @"History";
+  
   __weak UITableView* weakView = self.tableView;
   
   self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:@"count down finished"
-                                                    object:nil
-                                                     queue:[NSOperationQueue mainQueue]
-                                                usingBlock:^(NSNotification * _Nonnull note) {
-                                                  NSLog(@"%@", note.name);
-                                                  [weakView reloadData];
-  }];
+                                                                    object:nil
+                                                                     queue:[NSOperationQueue mainQueue]
+                                                                usingBlock:^(NSNotification * _Nonnull note) {
+                                                                  NSLog(@"%@", note.name);
+                                                                  [weakView reloadData];
+                                                                }];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
-  [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:@"count down finished"
+                                                object:nil];
 }
 
 #pragma mark - core date RW
@@ -58,8 +67,8 @@
   return [[array reverseObjectEnumerator] allObjects];
 }
 
-- (NSArray *)processedByMonth {
-  NSMutableArray* months = [[NSMutableArray alloc] init];
+- (NSArray *)processedByDate {
+  NSMutableArray* dates = [[NSMutableArray alloc] init];
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
   NSArray* records = self.records;
   NSMutableArray* processed = [[NSMutableArray alloc] init];
@@ -68,9 +77,9 @@
     if ([obj isKindOfClass: [Record class]]) {
       Record* r = (Record *)obj;
       NSString* s = [formatter stringFromDate:r.date];
-      NSUInteger index = [months indexOfObject:s];
+      NSUInteger index = [dates indexOfObject:s];
       if (index > NSIntegerMax - 10) {
-        [months addObject:s];
+        [dates addObject:s];
         [processed addObject:[[NSMutableArray alloc] initWithObjects:r, nil]];
       } else {
         [((NSMutableArray *)processed[index]) addObject:r];
@@ -83,30 +92,35 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return self.processedByMonth.count;
+  return self.processedByDate.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return ((NSArray *)self.processedByMonth[section]).count;
+  //  return ((NSArray *)self.processedByDate[section]).count;
+  return 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recordCell"
-                                                          forIndexPath:indexPath];
+  RecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recordCell"
+                                                     forIndexPath:indexPath];
   
-  Record* record = self.records[indexPath.row];
+  //  Record* record = self.records[indexPath.row];
   
-  NSString* info = [NSString stringWithFormat:@"%@ -- %@", record.starttime, record.endtime];
+  //  NSString* info = [NSString stringWithFormat:@"%@ -- %@", record.starttime, record.endtime];
+  //
+  //  cell.textLabel.text = info;
   
-  cell.textLabel.text = info;
+  //  cell.times = self.records.count;
+  //  cell.times = [self.tableView numberOfRowsInSection:indexPath.section];
+  cell.times = ((NSArray *)self.processedByDate[indexPath.section]).count;
   
   return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   UILabel* header = [[UILabel alloc] init];
-  NSArray* currentMonthArray = (NSArray *)self.processedByMonth[section];
+  NSArray* currentMonthArray = (NSArray *)self.processedByDate[section];
   Record* record = (Record *)currentMonthArray.firstObject;
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
   formatter.dateFormat = @"   MMM dd, yyyy";
@@ -149,14 +163,16 @@
  }
  */
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.destinationViewController isKindOfClass:[DetailTableViewController class]]) {
+    DetailTableViewController* destination = segue.destinationViewController;
+    destination.daily = self.processedByDate[[self.tableView indexPathForCell:sender].section];
+  }
+}
+
 
 @end

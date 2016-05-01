@@ -10,6 +10,9 @@
 		CC2654AE1CB7B66C00F5DC84 /* Record+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2654AB1CB7B66C00F5DC84 /* Record+CoreDataProperties.m */; };
 		CC2654AF1CB7B66C00F5DC84 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2654AD1CB7B66C00F5DC84 /* Record.m */; };
 		CC653C771CB9CF87008D1239 /* HistorySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CC653C761CB9CF87008D1239 /* HistorySegue.m */; };
+		CCB39C111CD5F76300C0AC4A /* RecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB39C101CD5F76300C0AC4A /* RecordView.m */; };
+		CCB39C141CD61F6500C0AC4A /* RecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB39C131CD61F6500C0AC4A /* RecordCell.m */; };
+		CCB39C171CD6248B00C0AC4A /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB39C161CD6248B00C0AC4A /* DetailTableViewController.m */; };
 		CCB490481CB6502A00E8A919 /* TimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB490471CB6502A00E8A919 /* TimerView.m */; };
 		CCB490511CB75CB700E8A919 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB490501CB75CB700E8A919 /* HistoryTableViewController.m */; };
 		CCCA2A251CC4760A00DF8D63 /* PomodoroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCA2A241CC4760A00DF8D63 /* PomodoroTests.m */; };
@@ -40,6 +43,12 @@
 		CC2654AD1CB7B66C00F5DC84 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		CC653C751CB9CF87008D1239 /* HistorySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistorySegue.h; sourceTree = "<group>"; };
 		CC653C761CB9CF87008D1239 /* HistorySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistorySegue.m; sourceTree = "<group>"; };
+		CCB39C0F1CD5F76300C0AC4A /* RecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordView.h; sourceTree = "<group>"; };
+		CCB39C101CD5F76300C0AC4A /* RecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordView.m; sourceTree = "<group>"; };
+		CCB39C121CD61F6500C0AC4A /* RecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordCell.h; sourceTree = "<group>"; };
+		CCB39C131CD61F6500C0AC4A /* RecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordCell.m; sourceTree = "<group>"; };
+		CCB39C151CD6248B00C0AC4A /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		CCB39C161CD6248B00C0AC4A /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
 		CCB490461CB6502A00E8A919 /* TimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TimerView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CCB490471CB6502A00E8A919 /* TimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TimerView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CCB4904F1CB75CB700E8A919 /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
@@ -90,6 +99,10 @@
 				CCB490471CB6502A00E8A919 /* TimerView.m */,
 				CC653C751CB9CF87008D1239 /* HistorySegue.h */,
 				CC653C761CB9CF87008D1239 /* HistorySegue.m */,
+				CCB39C121CD61F6500C0AC4A /* RecordCell.h */,
+				CCB39C131CD61F6500C0AC4A /* RecordCell.m */,
+				CCB39C0F1CD5F76300C0AC4A /* RecordView.h */,
+				CCB39C101CD5F76300C0AC4A /* RecordView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -97,10 +110,12 @@
 		CCB4904D1CB738D400E8A919 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CCB4904F1CB75CB700E8A919 /* HistoryTableViewController.h */,
-				CCB490501CB75CB700E8A919 /* HistoryTableViewController.m */,
 				CCF88F401CB3EFD700AED924 /* ViewController.h */,
 				CCF88F411CB3EFD700AED924 /* ViewController.m */,
+				CCB4904F1CB75CB700E8A919 /* HistoryTableViewController.h */,
+				CCB490501CB75CB700E8A919 /* HistoryTableViewController.m */,
+				CCB39C151CD6248B00C0AC4A /* DetailTableViewController.h */,
+				CCB39C161CD6248B00C0AC4A /* DetailTableViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -287,11 +302,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB39C171CD6248B00C0AC4A /* DetailTableViewController.m in Sources */,
 				CC653C771CB9CF87008D1239 /* HistorySegue.m in Sources */,
 				CC2654AE1CB7B66C00F5DC84 /* Record+CoreDataProperties.m in Sources */,
 				CC2654AF1CB7B66C00F5DC84 /* Record.m in Sources */,
+				CCB39C111CD5F76300C0AC4A /* RecordView.m in Sources */,
 				CCB490511CB75CB700E8A919 /* HistoryTableViewController.m in Sources */,
 				CCF88F481CB3EFD700AED924 /* Pomodoro.xcdatamodeld in Sources */,
+				CCB39C141CD61F6500C0AC4A /* RecordCell.m in Sources */,
 				CCF88F421CB3EFD700AED924 /* ViewController.m in Sources */,
 				CCF88F3F1CB3EFD700AED924 /* AppDelegate.m in Sources */,
 				CCF88F3C1CB3EFD700AED924 /* main.m in Sources */,
@@ -485,6 +503,7 @@
 				CCCA2A231CC4759200DF8D63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CCF88F321CB3EFD700AED924 /* Build configuration list for PBXProject "Pomodoro" */ = {
 			isa = XCConfigurationList;

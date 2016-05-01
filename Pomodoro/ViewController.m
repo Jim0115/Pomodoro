@@ -203,7 +203,7 @@ static const uint DEFAULT_TIME = 25 * 60;
   r.endtime = [self.minAndSecFormatter stringFromDate:self.finishDate];
   r.date = [NSDate date];
   
-  [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
+//  [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
 }
 
 - (NSManagedObjectContext *)context {
