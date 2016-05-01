@@ -16,22 +16,24 @@ IB_DESIGNABLE
 // An empty implementation adversely affects performance during animation.
 
 - (void)drawRect:(CGRect)rect {
-  self.times = 3;
-  NSLog(@"%f %f", self.bounds.size.height, self.bounds.size.width);
   static const CGFloat OFFSET = 10;
   static const CGFloat SPACE = 5;
-  CGFloat width = (self.bounds.size.width - OFFSET * 2 - SPACE * 5) / 5;
-  NSLog(@"%f", width);
+  
+//  CGFloat width = (self.bounds.size.width - OFFSET * 2 - SPACE * 5) / 5;
+  CGFloat width = self.bounds.size.height / 2;
+//  NSInteger nums = lround((self.bounds.size.width - OFFSET * 10) / width);
+  NSInteger nums = 7;
+  NSInteger times = self.times >= nums ? nums : self.times;
   [[UIColor redColor] set];
   NSMutableArray* paths = [NSMutableArray array];
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < nums; i++) {
     UIBezierPath* path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(OFFSET + i * (width + SPACE), (self.bounds.size.height - width) / 2, width, width)];
     [path stroke];
     [paths addObject:path];
   }
 
   
-  for (int i = 0; i < self.times - 1; i++) {
+  for (int i = 0; i < times; i++) {
     [((UIBezierPath *)paths[i]) fill];
   }
 }
