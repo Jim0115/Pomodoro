@@ -34,7 +34,7 @@
 
 @implementation ViewController
 
-static const uint DEFAULT_TIME = 25 * 60;
+static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -194,16 +194,18 @@ static const uint DEFAULT_TIME = 25 * 60;
 
 - (void)appendCurrentNewRecord {
   
-  NSEntityDescription* entity = [NSEntityDescription entityForName:@"Record"
-                                            inManagedObjectContext:self.context];
+//  Record* entity = [NSEntityDescription entityForName:@"Record"
+//                                            inManagedObjectContext:self.context];
   
-  Record* r = [[Record alloc] initWithEntity:entity
-              insertIntoManagedObjectContext:self.context];
+//  Record* r = [[Record alloc] initWithEntity:entity
+//              insertIntoManagedObjectContext:self.context];
+  Record* r = [NSEntityDescription insertNewObjectForEntityForName:@"Record"
+                                            inManagedObjectContext:self.context];
   r.starttime = [self.minAndSecFormatter stringFromDate:self.startDate];
   r.endtime = [self.minAndSecFormatter stringFromDate:self.finishDate];
   r.date = [NSDate date];
   
-//  [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
+  [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
 }
 
 - (NSManagedObjectContext *)context {
