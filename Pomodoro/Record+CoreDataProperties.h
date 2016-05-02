@@ -2,7 +2,7 @@
 //  Record+CoreDataProperties.h
 //  Pomodoro
 //
-//  Created by 王仕杰 on 4/8/16.
+//  Created by 王仕杰 on 5/2/16.
 //  Copyright © 2016 王仕杰. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -10,6 +10,7 @@
 //
 
 #import "Record.h"
+@class User;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSDate *date;
 @property (nullable, nonatomic, retain) NSString *endtime;
 @property (nullable, nonatomic, retain) NSString *starttime;
+@property (nullable, nonatomic, retain) User *user;
 
 @end
 

@@ -4,8 +4,15 @@
         <attribute name="date" attributeType="Date" syncable="YES"/>
         <attribute name="endtime" attributeType="String" syncable="YES"/>
         <attribute name="starttime" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="records" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="records" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="user" inverseEntity="Record" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Record" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Record" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="User" positionX="135" positionY="-12" width="128" height="88"/>
     </elements>
 </model>

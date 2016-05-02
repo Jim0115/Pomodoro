@@ -104,6 +104,7 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="IDP-oD-aKJ">
+                        <barButtonItem key="leftBarButtonItem" title="Login" id="0z2-zc-VJj"/>
                         <barButtonItem key="rightBarButtonItem" title="History" id="ama-FN-ILM">
                             <connections>
                                 <segue destination="k5a-Aj-B40" kind="custom" identifier="show history" customClass="HistorySegue" id="TdS-7W-NUQ"/>

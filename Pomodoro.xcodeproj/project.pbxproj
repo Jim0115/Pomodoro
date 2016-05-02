@@ -17,6 +17,8 @@
 		CCB490511CB75CB700E8A919 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB490501CB75CB700E8A919 /* HistoryTableViewController.m */; };
 		CCCA2A251CC4760A00DF8D63 /* PomodoroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCA2A241CC4760A00DF8D63 /* PomodoroTests.m */; };
 		CCD4442E1CB9DF2400C71556 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CCD444301CB9DF2400C71556 /* InfoPlist.strings */; };
+		CCEF91E01CD7627A00FE262B /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEF91DD1CD7627A00FE262B /* User+CoreDataProperties.m */; };
+		CCEF91E11CD7627A00FE262B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEF91DF1CD7627A00FE262B /* User.m */; };
 		CCF88F3C1CB3EFD700AED924 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F3B1CB3EFD700AED924 /* main.m */; };
 		CCF88F3F1CB3EFD700AED924 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F3E1CB3EFD700AED924 /* AppDelegate.m */; };
 		CCF88F421CB3EFD700AED924 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F411CB3EFD700AED924 /* ViewController.m */; };
@@ -60,6 +62,10 @@
 		CCD4442F1CB9DF2400C71556 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CCD444311CB9DF2500C71556 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CCD444341CB9E8B400C71556 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		CCEF91DC1CD7627A00FE262B /* User+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CCEF91DD1CD7627A00FE262B /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CCEF91DE1CD7627A00FE262B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		CCEF91DF1CD7627A00FE262B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CCF88F371CB3EFD700AED924 /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCF88F3B1CB3EFD700AED924 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CCF88F3D1CB3EFD700AED924 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,6 +129,10 @@
 		CCB4904E1CB738E200E8A919 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCEF91DC1CD7627A00FE262B /* User+CoreDataProperties.h */,
+				CCEF91DD1CD7627A00FE262B /* User+CoreDataProperties.m */,
+				CCEF91DE1CD7627A00FE262B /* User.h */,
+				CCEF91DF1CD7627A00FE262B /* User.m */,
 				CC2654AA1CB7B66C00F5DC84 /* Record+CoreDataProperties.h */,
 				CC2654AB1CB7B66C00F5DC84 /* Record+CoreDataProperties.m */,
 				CC2654AC1CB7B66C00F5DC84 /* Record.h */,
@@ -307,8 +317,10 @@
 				CC2654AE1CB7B66C00F5DC84 /* Record+CoreDataProperties.m in Sources */,
 				CC2654AF1CB7B66C00F5DC84 /* Record.m in Sources */,
 				CCB39C111CD5F76300C0AC4A /* RecordView.m in Sources */,
+				CCEF91E01CD7627A00FE262B /* User+CoreDataProperties.m in Sources */,
 				CCB490511CB75CB700E8A919 /* HistoryTableViewController.m in Sources */,
 				CCF88F481CB3EFD700AED924 /* Pomodoro.xcdatamodeld in Sources */,
+				CCEF91E11CD7627A00FE262B /* User.m in Sources */,
 				CCB39C141CD61F6500C0AC4A /* RecordCell.m in Sources */,
 				CCF88F421CB3EFD700AED924 /* ViewController.m in Sources */,
 				CCF88F3F1CB3EFD700AED924 /* AppDelegate.m in Sources */,

@@ -1,5 +1,5 @@
 //
-//  Record+CoreDataProperties.m
+//  User+CoreDataProperties.m
 //  Pomodoro
 //
 //  Created by 王仕杰 on 5/2/16.
@@ -9,13 +9,12 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Record+CoreDataProperties.h"
+#import "User+CoreDataProperties.h"
 
-@implementation Record (CoreDataProperties)
+@implementation User (CoreDataProperties)
 
-@dynamic date;
-@dynamic endtime;
-@dynamic starttime;
-@dynamic user;
+@dynamic name;
+@dynamic password;
+@dynamic records;
 
 @end
