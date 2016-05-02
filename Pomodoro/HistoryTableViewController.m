@@ -65,9 +65,13 @@
   NSArray* array;
   
   NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"Record"];
+  request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date"
+                                                            ascending:false
+                                                             selector:@selector(compare:)]];
   array = [self.context executeFetchRequest:request error:nil];
   
-  return [[array reverseObjectEnumerator] allObjects];
+//  return [[array reverseObjectEnumerator] allObjects];
+  return array;
 }
 
 - (NSArray *)processedByDate {
@@ -128,7 +132,7 @@
   Record* record = (Record *)currentMonthArray.firstObject;
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
   formatter.locale = [NSLocale autoupdatingCurrentLocale];
-//  formatter.dateFormat = @"   MMM dd, yyyy";
+  //  formatter.dateFormat = @"   MMM dd, yyyy";
   formatter.dateStyle = NSDateFormatterMediumStyle;
   header.text = [formatter stringFromDate:record.date];
   header.backgroundColor = [UIColor whiteColor];
