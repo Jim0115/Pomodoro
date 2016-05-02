@@ -17,7 +17,12 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
+  NSDateFormatter* formatter = [NSDateFormatter new];
+  formatter.dateStyle = NSDateFormatterMediumStyle;
+  formatter.locale = [NSLocale autoupdatingCurrentLocale];
+  if (self.daily.count) {
+    self.title = [formatter stringFromDate:((Record *)self.daily[0]).date];
+  }
   // Uncomment the following line to preserve selection between presentations.
   // self.clearsSelectionOnViewWillAppear = NO;
   
