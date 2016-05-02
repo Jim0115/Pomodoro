@@ -31,8 +31,11 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
-  self.title = @"History";
+  if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"en"]) {
+    self.title = @"History";
+  } else {
+    self.title = @"历史";
+  }
   
   __weak UITableView* weakView = self.tableView;
   
@@ -70,6 +73,7 @@
 - (NSArray *)processedByDate {
   NSMutableArray* dates = [[NSMutableArray alloc] init];
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+  formatter.locale = [NSLocale autoupdatingCurrentLocale];
   NSArray* records = self.records;
   NSMutableArray* processed = [[NSMutableArray alloc] init];
   formatter.dateFormat = @"yyyy MM dd";
@@ -123,7 +127,9 @@
   NSArray* currentMonthArray = (NSArray *)self.processedByDate[section];
   Record* record = (Record *)currentMonthArray.firstObject;
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-  formatter.dateFormat = @"   MMM dd, yyyy";
+  formatter.locale = [NSLocale autoupdatingCurrentLocale];
+//  formatter.dateFormat = @"   MMM dd, yyyy";
+  formatter.dateStyle = NSDateFormatterMediumStyle;
   header.text = [formatter stringFromDate:record.date];
   header.backgroundColor = [UIColor whiteColor];
   return header;
