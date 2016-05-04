@@ -18,6 +18,12 @@
   // Override point for customization after application launch.
   [application registerUserNotificationSettings: [UIUserNotificationSettings settingsForTypes: UIUserNotificationTypeAlert |UIUserNotificationTypeBadge | UIUserNotificationTypeSound
                                                                                    categories: nil]];
+  
+  if (![[NSUserDefaults standardUserDefaults] stringForKey:@"current username"]) {
+    [[NSUserDefaults standardUserDefaults] setObject:@""
+                                              forKey:@"current username"];
+  }
+  
   return YES;
 }
 

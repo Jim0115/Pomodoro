@@ -8,11 +8,10 @@
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="records" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="user" inverseEntity="Record" syncable="YES"/>
     </entity>
     <elements>
         <element name="Record" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="User" positionX="135" positionY="-12" width="128" height="88"/>
+        <element name="User" positionX="135" positionY="-12" width="128" height="73"/>
     </elements>
 </model>

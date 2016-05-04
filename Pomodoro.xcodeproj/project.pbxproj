@@ -19,6 +19,7 @@
 		CCD4442E1CB9DF2400C71556 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CCD444301CB9DF2400C71556 /* InfoPlist.strings */; };
 		CCEF91E01CD7627A00FE262B /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEF91DD1CD7627A00FE262B /* User+CoreDataProperties.m */; };
 		CCEF91E11CD7627A00FE262B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEF91DF1CD7627A00FE262B /* User.m */; };
+		CCEF92301CD894C200FE262B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEF922F1CD894C200FE262B /* LoginViewController.m */; };
 		CCF88F3C1CB3EFD700AED924 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F3B1CB3EFD700AED924 /* main.m */; };
 		CCF88F3F1CB3EFD700AED924 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F3E1CB3EFD700AED924 /* AppDelegate.m */; };
 		CCF88F421CB3EFD700AED924 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF88F411CB3EFD700AED924 /* ViewController.m */; };
@@ -66,6 +67,8 @@
 		CCEF91DD1CD7627A00FE262B /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CCEF91DE1CD7627A00FE262B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CCEF91DF1CD7627A00FE262B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CCEF922E1CD894C200FE262B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		CCEF922F1CD894C200FE262B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CCF88F371CB3EFD700AED924 /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCF88F3B1CB3EFD700AED924 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CCF88F3D1CB3EFD700AED924 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 			children = (
 				CCF88F401CB3EFD700AED924 /* ViewController.h */,
 				CCF88F411CB3EFD700AED924 /* ViewController.m */,
+				CCEF922E1CD894C200FE262B /* LoginViewController.h */,
+				CCEF922F1CD894C200FE262B /* LoginViewController.m */,
 				CCB4904F1CB75CB700E8A919 /* HistoryTableViewController.h */,
 				CCB490501CB75CB700E8A919 /* HistoryTableViewController.m */,
 				CCB39C151CD6248B00C0AC4A /* DetailTableViewController.h */,
@@ -326,6 +331,7 @@
 				CCF88F3F1CB3EFD700AED924 /* AppDelegate.m in Sources */,
 				CCF88F3C1CB3EFD700AED924 /* main.m in Sources */,
 				CCB490481CB6502A00E8A919 /* TimerView.m in Sources */,
+				CCEF92301CD894C200FE262B /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

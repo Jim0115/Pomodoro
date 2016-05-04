@@ -20,6 +20,8 @@
 @property (nonatomic, readonly, copy) NSArray* records;
 @property (nonatomic, copy) NSArray* processedByDate;
 
+@property (nonatomic) NSFetchedResultsController* resultController;
+
 @property (nonatomic) id observer;
 
 
@@ -74,6 +76,21 @@
   return array;
 }
 
+- (NSFetchedResultsController *)resultController {
+  if (!_resultController) {
+    NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"Record"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date"
+                                                              ascending:false
+                                                               selector:@selector(compare:)]];
+//    request.predicate = [NSPredicate predicateWithFormat:@"format"];
+    _resultController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                            managedObjectContext:self.context
+                                                              sectionNameKeyPath:@"date"
+                                                                       cacheName:@"recordCache"];
+  }
+  return _resultController;
+}
+
 - (NSArray *)processedByDate {
   NSMutableArray* dates = [[NSMutableArray alloc] init];
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -101,10 +118,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return self.processedByDate.count;
+//  return self.resultController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   //  return ((NSArray *)self.processedByDate[section]).count;
+  return [self.resultController.sections objectAtIndex:section].numberOfObjects;
   return 1;
 }
 
@@ -138,41 +157,6 @@
   header.backgroundColor = [UIColor whiteColor];
   return header;
 }
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
 
 #pragma mark - Navigation
 

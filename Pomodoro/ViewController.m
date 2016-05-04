@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet TimerView *timerView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *loginButton;
 
 @property (nonatomic) NSInteger time;
 
@@ -34,11 +35,20 @@
 
 @implementation ViewController
 
-static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
+static const NSUInteger DEFAULT_TIME = 2; // 25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  NSUserDefaults* standard = [NSUserDefaults standardUserDefaults];
+  NSLog(@"%@", [standard valueForKey:@"current username"]);
+  
+  if ([(NSString *)[standard valueForKey:@"current username"] isEqualToString:@""]) {
+    self.loginButton.title = @"Login";
+  } else {
+    [self.loginButton setTitle:(NSString *)[standard valueForKey:@"current username"]];
+  }
+
   self.timeLabel.hidden = YES;
   self.timeLabel.backgroundColor = [UIColor whiteColor];
   self.time = DEFAULT_TIME;
@@ -71,13 +81,19 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
                                                   }
                                                   NSLog(@"interval = %f", [weakSelf.finishDate timeIntervalSinceNow]);
                                                 }];
+  [[NSNotificationCenter defaultCenter] addObserverForName:@"login"
+                                                    object:nil
+                                                     queue:[NSOperationQueue mainQueue]
+                                                usingBlock:^(NSNotification * _Nonnull noti) {
+//                                                  NSLog(@"%@", noti.object[@"username"]);
+//                                                  NSLog(@"%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"current username"]);
+                                                  [self.loginButton setTitle:noti.object[@"username"]];
+                                                }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  
   [self updateTitle];
-  
 }
 
 #pragma mark - UI
@@ -113,6 +129,32 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
   NSNotification* noti = [NSNotification notificationWithName:@"count down finished" object:nil];
   [[NSNotificationCenter defaultCenter] postNotification:noti];
 }
+
+- (IBAction)showLogin:(UIBarButtonItem *)sender {
+  if (![sender.title isEqualToString:@"Login"]) {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Log out?"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Conform"
+                                             style:UIAlertActionStyleDefault
+                                           handler:^(UIAlertAction * _Nonnull action) {
+                                             sender.title = @"Login";
+                                             [[NSUserDefaults standardUserDefaults] setObject:@""
+                                                                                       forKey:@"current username"];
+                                           }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                             style:UIAlertActionStyleCancel
+                                            handler:nil]];
+    [self presentViewController:alert
+                       animated:true
+                     completion:nil];
+  } else {
+    [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"loginVC"]
+                       animated:true
+                     completion:nil];
+  }
+}
+
 
 #pragma mark - LocalNotifiacation
 
@@ -204,6 +246,8 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
   r.starttime = [self.minAndSecFormatter stringFromDate:self.startDate];
   r.endtime = [self.minAndSecFormatter stringFromDate:self.finishDate];
   r.date = [NSDate date];
+//  r.user.name = [[NSUserDefaults standardUserDefaults] stringForKey:@"current username"];
+#warning TODO
   
   [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
 }
