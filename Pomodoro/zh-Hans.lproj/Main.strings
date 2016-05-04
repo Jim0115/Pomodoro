@@ -1,8 +1,15 @@
+
+/* Class = "UIBarButtonItem"; title = "Share"; ObjectID = "WC6-s0-VpS"; */
+"WC6-s0-VpS.title" = "分享";
+
 /* Class = "UIButton"; normalTitle = "Start"; ObjectID = "abs-7h-6YN"; */
 "abs-7h-6YN.normalTitle" = "开始";
 
 /* Class = "UIBarButtonItem"; title = "History"; ObjectID = "ama-FN-ILM"; */
 "ama-FN-ILM.title" = "历史";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "i5t-Aj-oJI"; */
+"i5t-Aj-oJI.text" = "Title";
 
 /* Class = "UILabel"; text = "23:59"; ObjectID = "zNZ-jQ-W5b"; */
 "zNZ-jQ-W5b.text" = "23:59";

@@ -104,6 +104,11 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="IDP-oD-aKJ">
+                        <barButtonItem key="leftBarButtonItem" title="Share" id="WC6-s0-VpS">
+                            <connections>
+                                <action selector="share:" destination="BYZ-38-t0r" id="PqY-90-1Rp"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="History" id="ama-FN-ILM">
                             <connections>
                                 <segue destination="k5a-Aj-B40" kind="custom" identifier="show history" customClass="HistorySegue" id="TdS-7W-NUQ"/>

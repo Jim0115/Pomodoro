@@ -43,6 +43,7 @@
 		CC2654AD1CB7B66C00F5DC84 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		CC653C751CB9CF87008D1239 /* HistorySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistorySegue.h; sourceTree = "<group>"; };
 		CC653C761CB9CF87008D1239 /* HistorySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistorySegue.m; sourceTree = "<group>"; };
+		CC6C495F1CD9D7F000AD544A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		CCB39C0F1CD5F76300C0AC4A /* RecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordView.h; sourceTree = "<group>"; };
 		CCB39C101CD5F76300C0AC4A /* RecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordView.m; sourceTree = "<group>"; };
 		CCB39C121CD61F6500C0AC4A /* RecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordCell.h; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		CCCA2A1A1CC4759200DF8D63 /* PomodoroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCCA2A1E1CC4759200DF8D63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCCA2A241CC4760A00DF8D63 /* PomodoroTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PomodoroTests.m; sourceTree = "<group>"; };
-		CCD4442A1CB9DE2F00C71556 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		CCD4442F1CB9DF2400C71556 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CCD444311CB9DF2500C71556 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CCD444341CB9E8B400C71556 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CCF88F441CB3EFD700AED924 /* Base */,
-				CCD4442A1CB9DE2F00C71556 /* zh-Hans */,
+				CC6C495F1CD9D7F000AD544A /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
