@@ -52,3 +52,10 @@ Override `- (void)perform` method of `UIStoryboardSegue` Class.
 By using Size Classes:  
 ![image](http://7xt1ag.com1.z0.glb.clouddn.com/Screen%20Shot%202016-04-16%20at%2008.55.35.png)  
 Set different constraints in different size classes
+
+## Version
+### Version 1.0.1
+Complete basic function.
+### Version 1.0.2
+A new format of your history.  
+Now you can share your Pomodoro to your social media.
