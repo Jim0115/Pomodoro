@@ -11,6 +11,8 @@
 #import "Record.h"
 #import "AppDelegate.h"
 
+@import Social;
+
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -18,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet TimerView *timerView;
 
 @property (nonatomic) NSInteger time;
+@property (nonatomic) NSInteger today;
 
 @property (nonatomic, readonly) UILocalNotification* finishNotification;
 
@@ -92,6 +95,7 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
       today++;
     }
   }
+  _today = today;
   
   if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"en"]) {
     self.title = [NSString stringWithFormat:@"Today: %ld", (long)today];
@@ -194,11 +198,11 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
 
 - (void)appendCurrentNewRecord {
   
-//  Record* entity = [NSEntityDescription entityForName:@"Record"
-//                                            inManagedObjectContext:self.context];
+  //  Record* entity = [NSEntityDescription entityForName:@"Record"
+  //                                            inManagedObjectContext:self.context];
   
-//  Record* r = [[Record alloc] initWithEntity:entity
-//              insertIntoManagedObjectContext:self.context];
+  //  Record* r = [[Record alloc] initWithEntity:entity
+  //              insertIntoManagedObjectContext:self.context];
   Record* r = [NSEntityDescription insertNewObjectForEntityForName:@"Record"
                                             inManagedObjectContext:self.context];
   r.starttime = [self.minAndSecFormatter stringFromDate:self.startDate];
@@ -231,6 +235,62 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
   
   return array;
 }
+
+#pragma mark - Share
+
+- (IBAction)share:(UIBarButtonItem *)sender {
+  UIAlertController* alert;
+  if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"zh"]) {
+    alert = [UIAlertController alertControllerWithTitle:@"分享到..."
+                                        message:nil
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+  } else {
+    alert = [UIAlertController alertControllerWithTitle:@"Share to..."
+                                                message:nil
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+  }
+  
+  __weak ViewController* weakSelf = self;
+  [alert addAction:[UIAlertAction actionWithTitle:@"Twitter"
+                                            style:UIAlertActionStyleDefault
+                                          handler:^(UIAlertAction* action){ [weakSelf postShareMsgWithType:SLServiceTypeTwitter]; }]];
+  [alert addAction:[UIAlertAction actionWithTitle:@"Facebook"
+                                            style:UIAlertActionStyleDefault
+                                          handler:^(UIAlertAction* action){ [weakSelf postShareMsgWithType:SLServiceTypeFacebook]; }]];
+  
+  if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"zh"]) {
+    [alert addAction:[UIAlertAction actionWithTitle:@"新浪微博"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction* action){ [weakSelf postShareMsgWithType:SLServiceTypeSinaWeibo]; }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"腾讯微博"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction* action){ [weakSelf postShareMsgWithType:SLServiceTypeTencentWeibo]; }]];
+  }
+  if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"zh"]) {
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消"
+                                              style:UIAlertActionStyleCancel
+                                            handler:nil]];
+  } else {
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                              style:UIAlertActionStyleCancel
+                                            handler:nil]];
+  }
+  
+  alert.popoverPresentationController.barButtonItem = self.navigationItem.leftBarButtonItem;
+
+  [self presentViewController:alert
+                     animated:false
+                   completion:nil];
+}
+
+- (void)postShareMsgWithType:(NSString *)type {
+  SLComposeViewController* composeVC = [SLComposeViewController composeViewControllerForServiceType:type];
+  [composeVC setInitialText:[NSString stringWithFormat:@"I've finished %ld Pomodoro today!\n#Pomodoro", _today]];
+  [self presentViewController:composeVC
+                     animated:YES
+                   completion:nil];
+}
+
 
 #pragma mark - Gesture
 
