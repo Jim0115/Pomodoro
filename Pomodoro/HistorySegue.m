@@ -15,11 +15,12 @@
   if ([[UIDevice currentDevice].model isEqualToString:@"iPhone"]) {
     [self.sourceViewController.navigationController pushViewController:self.destinationViewController animated:true];
   } else {
-    self.destinationViewController.modalPresentationStyle = UIModalPresentationPopover;
+    UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:self.destinationViewController];
+    navi.modalPresentationStyle = UIModalPresentationPopover;
     
-    [self.sourceViewController presentViewController:self.destinationViewController animated:true completion:nil];
+    [self.sourceViewController presentViewController:navi animated:true completion:nil];
     
-    UIPopoverPresentationController* popover = self.destinationViewController.popoverPresentationController;
+    UIPopoverPresentationController* popover = navi.popoverPresentationController;
     popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
     popover.barButtonItem = self.sourceViewController.navigationItem.rightBarButtonItem;
   }
