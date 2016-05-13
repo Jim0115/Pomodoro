@@ -33,6 +33,8 @@
 @property (nonatomic) NSDate* startDate;
 @property (nonatomic) NSDate* finishDate;
 
+@property (weak, nonatomic) UIViewController* popover;
+
 @end
 
 @implementation ViewController
@@ -74,6 +76,11 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
                                                   }
                                                   NSLog(@"interval = %f", [weakSelf.finishDate timeIntervalSinceNow]);
                                                 }];
+//[NSTimer scheduledTimerWithTimeInterval:1
+//                                   target:self
+//                                 selector:@selector(logPresenting)
+//                                 userInfo:nil
+//                                  repeats:true];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -81,6 +88,10 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
   
   [self updateTitle];
   
+}
+
+- (void)logPresenting {
+  NSLog(@"%@", self.popover);
 }
 
 #pragma mark - UI
@@ -239,6 +250,7 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
 #pragma mark - Share
 
 - (IBAction)share:(UIBarButtonItem *)sender {
+  if (self.popover) { return; }
   UIAlertController* alert;
   if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"zh"]) {
     alert = [UIAlertController alertControllerWithTitle:@"分享到..."
@@ -249,6 +261,7 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
                                                 message:nil
                                          preferredStyle:UIAlertControllerStyleActionSheet];
   }
+  self.popover = alert;
   
   __weak ViewController* weakSelf = self;
   [alert addAction:[UIAlertAction actionWithTitle:@"Twitter"
@@ -300,6 +313,15 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
       [self performSegueWithIdentifier:@"show history" sender:self];
     }
   }
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  self.popover = segue.destinationViewController;
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+  return !self.popover;
 }
 
 @end
