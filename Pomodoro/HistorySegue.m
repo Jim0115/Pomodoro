@@ -7,7 +7,7 @@
 //
 
 #import "HistorySegue.h"
-
+#import "HistoryTableViewController.h"
 
 @implementation HistorySegue
 
@@ -17,6 +17,9 @@
   } else {
     UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:self.destinationViewController];
     navi.modalPresentationStyle = UIModalPresentationPopover;
+    HistoryTableViewController *dest = self.destinationViewController;
+    CGFloat height = navi.navigationBar.frame.size.height + 60.0 * dest.tableView.numberOfSections;
+    navi.preferredContentSize = CGSizeMake(300, height > 600 ? 600 : height);
     
     [self.sourceViewController presentViewController:navi animated:true completion:nil];
     
