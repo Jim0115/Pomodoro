@@ -18,6 +18,8 @@
   // Override point for customization after application launch.
   [application registerUserNotificationSettings: [UIUserNotificationSettings settingsForTypes: UIUserNotificationTypeAlert |UIUserNotificationTypeBadge | UIUserNotificationTypeSound
                                                                                    categories: nil]];
+  [[NSUserDefaults standardUserDefaults] setBool:YES
+                                          forKey:@"NSShowNonLocalizedStrings"];
   return YES;
 }
 
