@@ -52,18 +52,12 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
   
   __weak ViewController* weakSelf = self;
   
-  [[NSNotificationCenter defaultCenter] addObserverForName:@"resign active"
-                                                    object:[UIApplication sharedApplication].delegate
+  [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
+                                                    object:[UIApplication sharedApplication]
                                                      queue:[NSOperationQueue mainQueue]
                                                 usingBlock:^(NSNotification * _Nonnull note) {
                                                   NSLog(@"%@", note.name);
-                                                }];
-  
-  [[NSNotificationCenter defaultCenter] addObserverForName:@"become active"
-                                                    object:[UIApplication sharedApplication].delegate
-                                                     queue:[NSOperationQueue mainQueue]
-                                                usingBlock:^(NSNotification * _Nonnull note) {
-                                                  NSLog(@"%@", note.name);
+                                                  
                                                   if (weakSelf.time < 0 || weakSelf.time > DEFAULT_TIME) {
                                                     //finished
                                                     [weakSelf resetStatus];
@@ -76,11 +70,6 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
                                                   }
                                                   NSLog(@"interval = %f", [weakSelf.finishDate timeIntervalSinceNow]);
                                                 }];
-//[NSTimer scheduledTimerWithTimeInterval:1
-//                                   target:self
-//                                 selector:@selector(logPresenting)
-//                                 userInfo:nil
-//                                  repeats:true];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,11 +78,6 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
   [self updateTitle];
   
 }
-
-- (void)logPresenting {
-  NSLog(@"%@", self.popover);
-}
-
 #pragma mark - UI
 
 - (void)updateTitle {
