@@ -2,22 +2,23 @@
 //  Record+CoreDataProperties.h
 //  Pomodoro
 //
-//  Created by 王仕杰 on 4/8/16.
+//  Created by 王仕杰 on 29/09/2016.
 //  Copyright © 2016 王仕杰. All rights reserved.
 //
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
 
-#import "Record.h"
+#import "Record+CoreDataClass.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Record (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSDate *date;
-@property (nullable, nonatomic, retain) NSString *endtime;
-@property (nullable, nonatomic, retain) NSString *starttime;
++ (NSFetchRequest<Record *> *)fetchRequest;
+
+@property (nullable, nonatomic, copy) NSDate *date;
+@property (nullable, nonatomic, copy) NSString *endTime;
+@property (nullable, nonatomic, copy) NSString *startTime;
+@property (nullable, nonatomic, copy) NSString *dateKey;
 
 @end
 

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Record" representedClassName="Record" syncable="YES">
-        <attribute name="date" attributeType="Date" syncable="YES"/>
-        <attribute name="endtime" attributeType="String" syncable="YES"/>
-        <attribute name="starttime" attributeType="String" syncable="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endTime" attributeType="String" syncable="YES"/>
+        <attribute name="startTime" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Record" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Record" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>
