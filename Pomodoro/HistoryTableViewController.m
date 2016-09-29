@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "RecordView.h"
 #import "RecordCell.h"
-#import "Record.h"
+#import "Record+CoreDataClass.h"
 #import "DetailTableViewController.h"
 
 @import CoreData;
@@ -36,15 +36,17 @@
 - (NSFetchedResultsController *)fetchedResultController {
   if (!_fetchedResultController) {
     NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"Record"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"starttime"
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date"
                                                             ascending:YES]];
     
     _fetchedResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                    managedObjectContext:self.context
-                                                                     sectionNameKeyPath:@"starttime"
+                                                                     sectionNameKeyPath:@"dateKey"
                                                                               cacheName:@"HISTORY_CACHE"];
     
     [_fetchedResultController performFetch:nil];
+    
+    
   }
   return _fetchedResultController;
 }

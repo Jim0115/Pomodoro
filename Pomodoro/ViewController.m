@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "TimerView.h"
-#import "Record.h"
+#import "Record+CoreDataClass.h"
 #import "AppDelegate.h"
 
 @import Social;
@@ -39,7 +39,7 @@
 
 @implementation ViewController
 
-static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
+static const NSUInteger DEFAULT_TIME = 10; //25 * 60;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -68,13 +68,11 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
                                                     weakSelf.time = [weakSelf.finishDate timeIntervalSinceNow];
                                                     [weakSelf.timerView setNeedsDisplay];
                                                   }
-                                                  NSLog(@"interval = %f", [weakSelf.finishDate timeIntervalSinceNow]);
                                                 }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  
   [self updateTitle];
   
 }
@@ -192,17 +190,16 @@ static const NSUInteger DEFAULT_TIME = 10; // 25 * 60;
 #pragma mark - Core Data
 
 - (void)appendCurrentNewRecord {
-  
-  //  Record* entity = [NSEntityDescription entityForName:@"Record"
-  //                                            inManagedObjectContext:self.context];
-  
-  //  Record* r = [[Record alloc] initWithEntity:entity
-  //              insertIntoManagedObjectContext:self.context];
   Record* r = [NSEntityDescription insertNewObjectForEntityForName:@"Record"
                                             inManagedObjectContext:self.context];
-  r.starttime = [self.minAndSecFormatter stringFromDate:self.startDate];
-  r.endtime = [self.minAndSecFormatter stringFromDate:self.finishDate];
+  r.startTime = [self.minAndSecFormatter stringFromDate:self.startDate];
+  r.endTime = [self.minAndSecFormatter stringFromDate:self.finishDate];
   r.date = [NSDate date];
+  
+  NSDateFormatter* formatter = [NSDateFormatter new];
+  formatter.dateFormat = @"yyyyMMdd";
+  
+  r.dateKey = [formatter stringFromDate:[NSDate date]];
   
   [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
 }

@@ -7,7 +7,7 @@
 //
 
 #import "DetailTableViewController.h"
-#import "Record.h"
+#import "Record+CoreDataClass.h"
 
 @interface DetailTableViewController ()
 
@@ -47,7 +47,7 @@
   
   Record* record = self.daily[indexPath.row];
   
-  cell.textLabel.text = [NSString stringWithFormat:@"%@ -- %@", record.starttime, record.endtime];
+  cell.textLabel.text = [NSString stringWithFormat:@"%@ -- %@", record.startTime, record.endTime];
   
   return cell;
 }
