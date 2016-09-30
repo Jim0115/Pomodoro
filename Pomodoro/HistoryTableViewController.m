@@ -158,7 +158,8 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 //  return @"Title";
-  return self.fetchedResultController.sectionIndexTitles[section];
+//  return self.fetchedResultController.sectionIndexTitles[section];
+  return self.fetchedResultController.sections[section].name;
 }
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
