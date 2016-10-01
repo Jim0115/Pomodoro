@@ -39,7 +39,7 @@
   if (!_fetchedResultController) {
     NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:@"Record"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date"
-                                                            ascending:YES]];
+                                                              ascending:YES]];
     
     _fetchedResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                    managedObjectContext:self.context
@@ -71,21 +71,25 @@
     self.title = @"历史";
   }
   
-  __weak UITableView* weakView = self.tableView;
+  //  [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification
+  //                                                    object:nil
+  //                                                     queue:[NSOperationQueue mainQueue]
+  //                                                usingBlock:^(NSNotification * _Nonnull note) {
+  //                                                  [self.fetchedResultController performFetch:nil];
+  //                                                  [self.tableView reloadData];
+  //                                                }];
   
-  self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:@"count down finished"
-                                                                    object:nil
-                                                                     queue:[NSOperationQueue mainQueue]
-                                                                usingBlock:^(NSNotification * _Nonnull note) {
-                                                                  NSLog(@"%@", note.name);
-                                                                  [weakView reloadData];
-                                                                }];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updateModalAndUI)
+                                               name:NSManagedObjectContextDidSaveNotification
+                                             object:nil];
 }
+
 
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
   [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                  name:@"count down finished"
+                                                  name:NSManagedObjectContextObjectsDidChangeNotification
                                                 object:nil];
 }
 
@@ -95,15 +99,28 @@
   return ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
 }
 
+- (void)updateModalAndUI {
+  NSError* error;
+  [self.fetchedResultController performFetch:&error];
+  
+  if (!error) {
+    [self.tableView reloadData];
+  } else {
+    @throw [NSException exceptionWithName:error.localizedDescription
+                                   reason:nil
+                                 userInfo:nil];
+  }
+}
+
 //- (NSArray *)records {
 //  NSArray* array;
-//  
+//
 //  NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"Record"];
 //  request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date"
 //                                                            ascending:false
 //                                                             selector:@selector(compare:)]];
 //  array = [self.context executeFetchRequest:request error:nil];
-//  
+//
 //  //  return [[array reverseObjectEnumerator] allObjects];
 //  return array;
 //}
@@ -134,7 +151,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//  return self.processedByDate.count;
+  //  return self.processedByDate.count;
   return self.fetchedResultController.sections.count;
 }
 
@@ -157,19 +174,21 @@
   //  cell.times = self.records.count;
   //  cell.times = [self.tableView numberOfRowsInSection:indexPath.section]
   
-//  cell.times = ((NSArray *)self.processedByDate[indexPath.section]).count;
+  //  cell.times = ((NSArray *)self.processedByDate[indexPath.section]).count;
   
-//  cell.times = [self.fetchedResultController objectAtIndexPath:indexPath];
+  //  cell.times = [self.fetchedResultController objectAtIndexPath:indexPath];
   
-  cell.times = self.fetchedResultController.sections.count;
+  //  cell.times = self.fetchedResultController.sections.count;
+  
+  cell.times = [self.fetchedResultController.sections[indexPath.section] numberOfObjects];
   
   return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//  return @"Title";
-//  return self.fetchedResultController.sectionIndexTitles[section];
-//  return self.fetchedResultController.sections[section].name;
+  //  return @"Title";
+  //  return self.fetchedResultController.sectionIndexTitles[section];
+  //  return self.fetchedResultController.sections[section].name;
   
   if ([[self.fetchedResultController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]] isKindOfClass:[Record class]]) {
     Record* record = (Record *)[self.fetchedResultController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
