@@ -23,6 +23,8 @@
 
 @property (nonatomic, readonly) NSFetchedResultsController* fetchedResultController;
 
+@property (nonatomic, readonly) NSDateFormatter* dateFormatter;
+
 @property (nonatomic) id observer;
 
 @end
@@ -31,7 +33,7 @@
 
 #pragma mark - properties
 
-@synthesize fetchedResultController = _fetchedResultController;
+@synthesize fetchedResultController = _fetchedResultController, dateFormatter = _dateFormatter;
 
 - (NSFetchedResultsController *)fetchedResultController {
   if (!_fetchedResultController) {
@@ -49,6 +51,14 @@
     
   }
   return _fetchedResultController;
+}
+
+- (NSDateFormatter *)dateFormatter {
+  if (!_dateFormatter) {
+    _dateFormatter = [NSDateFormatter new];
+    _dateFormatter.dateFormat = @"yyyy-MM-dd";
+  }
+  return _dateFormatter;
 }
 
 #pragma mark - vc life cycle
@@ -159,7 +169,13 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 //  return @"Title";
 //  return self.fetchedResultController.sectionIndexTitles[section];
-  return self.fetchedResultController.sections[section].name;
+//  return self.fetchedResultController.sections[section].name;
+  
+  if ([[self.fetchedResultController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]] isKindOfClass:[Record class]]) {
+    Record* record = (Record *)[self.fetchedResultController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    return [self.dateFormatter stringFromDate:record.date];
+  }
+  return @"Error";
 }
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
