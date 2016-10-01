@@ -10,6 +10,6 @@
 
 @interface DetailTableViewController : UITableViewController
 
-@property (nonatomic, copy) NSArray* daily;
+@property (nonatomic, copy) NSString* dateKey;
 
 @end
