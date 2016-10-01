@@ -106,9 +106,6 @@ static const NSUInteger DEFAULT_TIME = 10; //25 * 60;
   self.timeLabel.hidden = YES;
   self.timerView.percentage = 1;
   self.finishDate = nil;
-  
-  NSNotification* noti = [NSNotification notificationWithName:@"count down finished" object:nil];
-  [[NSNotificationCenter defaultCenter] postNotification:noti];
 }
 
 #pragma mark - LocalNotifiacation
