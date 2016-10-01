@@ -214,12 +214,16 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//  if ([segue.destinationViewController isKindOfClass:[DetailTableViewController class]]) {
-//    DetailTableViewController* destination = segue.destinationViewController;
-//    destination.daily = self.processedByDate[[self.tableView indexPathForCell:sender].section];
-//  }
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.destinationViewController isKindOfClass:[DetailTableViewController class]]) {
+    DetailTableViewController* destination = segue.destinationViewController;
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
+    Record* record = ((Record *)[self.fetchedResultController objectAtIndexPath:indexPath]);
+    
+    destination.dateKey = record.dateKey;
+    destination.title = [self tableView:self.tableView titleForHeaderInSection:indexPath.section];
+  }
+}
 
 
 @end
