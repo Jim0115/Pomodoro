@@ -20,9 +20,11 @@
 @property (weak, nonatomic) IBOutlet TimerView *timerView;
 
 @property (nonatomic) NSInteger time;
-@property (nonatomic) NSInteger today;
+@property (nonatomic, assign) NSUInteger todayCount;
 
 @property (nonatomic, readonly) UILocalNotification* finishNotification;
+
+@property (nonatomic, readonly, copy) NSString* dateKey;
 
 @property (nonatomic) NSDateFormatter* minAndSecFormatter;
 
@@ -32,8 +34,6 @@
 
 @property (nonatomic) NSDate* startDate;
 @property (nonatomic) NSDate* finishDate;
-
-@property (weak, nonatomic) UIViewController* popover;
 
 @end
 
@@ -76,25 +76,27 @@ static const NSUInteger DEFAULT_TIME = 10; //25 * 60;
   [self updateTitle];
   
 }
+
 #pragma mark - UI
 
 - (void)updateTitle {
-  NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-  formatter.dateFormat = @"yyyyMMdd";
+  NSFetchRequest* request = [Record fetchRequest];
+  request.predicate = [NSPredicate predicateWithFormat:@"dateKey = %@", self.dateKey];
   
-  NSInteger today = 0;
-  for (Record* record in self.records) {
-    if ([[formatter stringFromDate:record.date] isEqualToString:[formatter stringFromDate:[NSDate date]]]) {
-      today++;
+  NSError* error;
+  NSUInteger today = [self.context countForFetchRequest:request
+                               error:&error];
+  _todayCount = today;
+  
+  if (!error) {
+    
+    if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"en"]) {
+      self.title = [NSString stringWithFormat:@"Today: %ld", today];
+    } else {
+      self.title = [NSString stringWithFormat:@"今日: %ld", today];
     }
   }
-  _today = today;
   
-  if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"en"]) {
-    self.title = [NSString stringWithFormat:@"Today: %ld", (long)today];
-  } else {
-    self.title = [NSString stringWithFormat:@"今日: %ld", (long)today];
-  }
 }
 
 - (void)resetStatus {
@@ -192,11 +194,9 @@ static const NSUInteger DEFAULT_TIME = 10; //25 * 60;
   r.startTime = [self.minAndSecFormatter stringFromDate:self.startDate];
   r.endTime = [self.minAndSecFormatter stringFromDate:self.finishDate];
   r.date = [NSDate date];
+
   
-  NSDateFormatter* formatter = [NSDateFormatter new];
-  formatter.dateFormat = @"yyyyMMdd";
-  
-  r.dateKey = [formatter stringFromDate:[NSDate date]];
+  r.dateKey = self.dateKey;
   
   [((AppDelegate *)[UIApplication sharedApplication].delegate) saveContext];
 }
@@ -216,19 +216,18 @@ static const NSUInteger DEFAULT_TIME = 10; //25 * 60;
   return _minAndSecFormatter;
 }
 
-- (NSArray *)records {
-  NSArray* array;
+- (NSString *)dateKey {
+  NSDateFormatter* formatter = [NSDateFormatter new];
+  formatter.dateFormat = @"yyyyMMdd";
   
-  NSFetchRequest* request = [[NSFetchRequest alloc] initWithEntityName:@"Record"];
-  array = [self.context executeFetchRequest:request error:nil];
-  
-  return array;
+  return [formatter stringFromDate:[NSDate date]];
 }
 
 #pragma mark - Share
 
 - (IBAction)share:(UIBarButtonItem *)sender {
-  if (self.popover) { return; }
+  if (self.presentedViewController) { return; }
+  
   UIAlertController* alert;
   if ([[NSBundle mainBundle].preferredLocalizations[0] containsString:@"zh"]) {
     alert = [UIAlertController alertControllerWithTitle:@"分享到..."
@@ -239,7 +238,6 @@ static const NSUInteger DEFAULT_TIME = 10; //25 * 60;
                                                 message:nil
                                          preferredStyle:UIAlertControllerStyleActionSheet];
   }
-  self.popover = alert;
   
   __weak ViewController* weakSelf = self;
   [alert addAction:[UIAlertAction actionWithTitle:@"Twitter"
@@ -276,7 +274,7 @@ static const NSUInteger DEFAULT_TIME = 10; //25 * 60;
 
 - (void)postShareMsgWithType:(NSString *)type {
   SLComposeViewController* composeVC = [SLComposeViewController composeViewControllerForServiceType:type];
-  [composeVC setInitialText:[NSString stringWithFormat:@"I've finished %ld Pomodoro today!\n#Pomodoro", _today]];
+  [composeVC setInitialText:[NSString stringWithFormat:@"I've finished %ld Pomodoro today!\n#Pomodoro", _todayCount]];
   [self presentViewController:composeVC
                      animated:YES
                    completion:nil];
@@ -294,12 +292,9 @@ static const NSUInteger DEFAULT_TIME = 10; //25 * 60;
 }
 
 #pragma mark - Navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  self.popover = segue.destinationViewController;
-}
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-  return !self.popover;
+  return !self.presentedViewController;
 }
 
 @end
